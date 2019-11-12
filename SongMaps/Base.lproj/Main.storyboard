@@ -1,24 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="SongMaps" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="FluidBackgroundView" customModule="SongMaps" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqt-H6-JMx" customClass="RoundedButton" customModule="SongMaps" customModuleProvider="target">
+                                <rect key="frame" x="107" y="244" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.83529411764705885" green="0.062745098039215685" blue="0.027450980392156862" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="GPA-cg-ZHH"/>
+                                    <constraint firstAttribute="height" constant="50" id="PhD-A1-xhI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Last.fm">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="lastFMTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cbz-cu-BLc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hko-aP-ZOu" customClass="RoundedButton" customModule="SongMaps" customModuleProvider="target">
+                                <rect key="frame" x="107" y="344" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.10196078431372549" green="0.078431372549019607" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Spotify">
+                                    <color key="titleColor" red="0.11764705882352941" green="0.84705882352941175" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="spotifyTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9N7-tD-sEc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9s-JF-yqd" customClass="RoundedButton" customModule="SongMaps" customModuleProvider="target">
+                                <rect key="frame" x="107" y="444" width="200" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Manual"/>
+                                <connections>
+                                    <action selector="manualTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bWy-f0-XDL"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="One line" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aUP-si-Bng">
+                                <rect key="frame" x="87" y="523" width="240" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="aUP-si-Bng" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="48b-L5-H2K"/>
+                            <constraint firstItem="M9s-JF-yqd" firstAttribute="height" secondItem="tqt-H6-JMx" secondAttribute="height" id="8nP-ma-Q5P"/>
+                            <constraint firstItem="aUP-si-Bng" firstAttribute="top" secondItem="M9s-JF-yqd" secondAttribute="bottom" constant="50" id="AhT-Tz-CC7"/>
+                            <constraint firstItem="M9s-JF-yqd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FKl-6M-ZRv"/>
+                            <constraint firstItem="M9s-JF-yqd" firstAttribute="top" secondItem="hko-aP-ZOu" secondAttribute="bottom" constant="50" id="J7G-Vm-9ZC"/>
+                            <constraint firstItem="M9s-JF-yqd" firstAttribute="width" secondItem="tqt-H6-JMx" secondAttribute="width" id="JdC-m7-htw"/>
+                            <constraint firstItem="tqt-H6-JMx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KvW-R4-K4Y"/>
+                            <constraint firstItem="hko-aP-ZOu" firstAttribute="height" secondItem="tqt-H6-JMx" secondAttribute="height" id="R4B-SM-zRd"/>
+                            <constraint firstItem="tqt-H6-JMx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="Uwe-8h-C9I"/>
+                            <constraint firstItem="hko-aP-ZOu" firstAttribute="width" secondItem="tqt-H6-JMx" secondAttribute="width" id="YQF-Gz-VYS"/>
+                            <constraint firstItem="hko-aP-ZOu" firstAttribute="top" secondItem="tqt-H6-JMx" secondAttribute="bottom" constant="50" id="YpD-Jd-JVv"/>
+                            <constraint firstItem="hko-aP-ZOu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gWr-Wv-Ej0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="backgroundView" destination="8bC-Xf-vdC" id="csW-l6-xGk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="139" y="139"/>
         </scene>
     </scenes>
 </document>
