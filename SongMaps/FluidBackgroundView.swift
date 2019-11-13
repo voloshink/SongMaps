@@ -53,7 +53,6 @@ class FluidBackgroundView: UIView {
         gradientLayer.add(gradientChangeAnimation, forKey: "colorChange")
         
         if var update = delayedGradientUpdate {
-            print("updating next gradient")
             gradientSet[nextGradientIndex(from: currentGradient)] = update.removeFirst()
             delayedGradientUpdate = update
             if update.count == 0 {
@@ -75,8 +74,6 @@ class FluidBackgroundView: UIView {
         let nextIndex = nextGradientIndex(from:currentGradient)
         gradientSet[nextIndex] = [currentSet[1], color.cgColor]
         delayedGradientUpdate = [[color.cgColor, by.cgColor], [by.cgColor, color.cgColor]]
-//        gradientSet.append([UIColor.green.cgColor, UIColor.green.cgColor])
-//        gradientSet.append([UIColor.blue.cgColor, UIColor.green.cgColor])
     }
 }
 

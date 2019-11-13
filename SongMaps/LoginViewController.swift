@@ -11,26 +11,14 @@ import UIKit
 class LoginViewController: UIViewController {
     
     @IBOutlet var backgroundView: FluidBackgroundView!
+    @IBOutlet weak var lastFMButton: RoundedButton!
+    @IBOutlet weak var spotifyButton: RoundedButton!
+    @IBOutlet weak var manualButton: RoundedButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        gradientLayer.colors = [UIColor.red.cgColor, UIColor.blue.cgColor]
-//        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-//        gradientLayer.frame = self.view.bounds
-//        view.layer.insertSublayer(self.gradientLayer, at:0)
-//
-        let seconds = 4.0
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-            print("animating")
-//            self.backgroundView.updateGradient()
-        }
     }
 
     
@@ -41,6 +29,22 @@ class LoginViewController: UIViewController {
     
     @IBAction func lastFMTap(_ sender: Any) {
         self.backgroundView.updateGradient(with: UIColor.red, followed: UIColor.white)
+        
+        UIView.animate(withDuration: 2.0, animations: {
+//            self.spotifyButton.isHidden = true
+            self.spotifyButton.alpha = 0.0
+            self.manualButton.isHidden = true
+        })
+        
+//        let lastFM = LastFM()
+//        lastFM.getArtists(user: "TehPolecat", progress: { progress in
+//            print(progress)
+//        }, completion: { artists in
+//            print(artists)
+//        }, error: {error in
+//            print(error)
+//        })
+        
     }
     
     @IBAction func spotifyTap(_ sender: Any) {

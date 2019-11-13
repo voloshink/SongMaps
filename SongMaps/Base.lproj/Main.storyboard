@@ -50,19 +50,10 @@
                                     <action selector="manualTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bWy-f0-XDL"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="One line" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aUP-si-Bng">
-                                <rect key="frame" x="87" y="523" width="240" height="128"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="aUP-si-Bng" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="48b-L5-H2K"/>
                             <constraint firstItem="M9s-JF-yqd" firstAttribute="height" secondItem="tqt-H6-JMx" secondAttribute="height" id="8nP-ma-Q5P"/>
-                            <constraint firstItem="aUP-si-Bng" firstAttribute="top" secondItem="M9s-JF-yqd" secondAttribute="bottom" constant="50" id="AhT-Tz-CC7"/>
                             <constraint firstItem="M9s-JF-yqd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FKl-6M-ZRv"/>
                             <constraint firstItem="M9s-JF-yqd" firstAttribute="top" secondItem="hko-aP-ZOu" secondAttribute="bottom" constant="50" id="J7G-Vm-9ZC"/>
                             <constraint firstItem="M9s-JF-yqd" firstAttribute="width" secondItem="tqt-H6-JMx" secondAttribute="width" id="JdC-m7-htw"/>
@@ -77,6 +68,9 @@
                     </view>
                     <connections>
                         <outlet property="backgroundView" destination="8bC-Xf-vdC" id="csW-l6-xGk"/>
+                        <outlet property="lastFMButton" destination="tqt-H6-JMx" id="9Nx-QK-cT2"/>
+                        <outlet property="manualButton" destination="M9s-JF-yqd" id="hy0-kO-9Tr"/>
+                        <outlet property="spotifyButton" destination="hko-aP-ZOu" id="bFL-n1-vP1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
