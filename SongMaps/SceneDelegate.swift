@@ -47,6 +47,57 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+//        print(URLContexts)
+        guard let url = URLContexts.first?.url else {
+            return
+        }
+        
+        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+            let params = components.queryItems else {
+                print("Invalid URL or params missing")
+                return
+        }
+        
+        if components.host == "spotify-login-callback" {
+            var state: String?
+            var code: String?
+            var error: String?
+            
+            for param in params {
+                if param.name == "code" {
+                    code = param.value
+                }
+                
+                if param.name == "state" {
+                    state = param.value
+                }
+                
+                if param.name == "error" {
+                    error = param.value
+                }
+            }
+            
+            guard let loginViewController = window?.rootViewController as? LoginViewController else {
+                return
+            }
+            
+            if let spotifyError = error {
+                loginViewController.spotifyAuthResponse(code: "", state: "", error: spotifyError)
+                return
+            }
+            
+            guard let spotifyCode = code, let spotifyState = state else {
+                return
+            }
+            
+            loginViewController.spotifyAuthResponse(code: spotifyCode, state: spotifyState, error: nil)
+        }
+        
+        
+//        print(params)
+    }
 
 
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,7 @@
 		04286061237B43E300517D71 /* model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0428605F237B43E300517D71 /* model.xcdatamodeld */; };
 		04286064237B44E900517D71 /* Artist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286062237B44E900517D71 /* Artist+CoreDataClass.swift */; };
 		04286065237B44E900517D71 /* Artist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286063237B44E900517D71 /* Artist+CoreDataProperties.swift */; };
+		04C2A6AF237CE435007D541B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2A6AE237CE435007D541B /* Spotify.swift */; };
 		F9080E57B05674B33FA7174A /* Pods_SongMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDEF4C728A3AD90CF64D7C8 /* Pods_SongMaps.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		04286060237B43E300517D71 /* Artist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Artist.xcdatamodel; sourceTree = "<group>"; };
 		04286062237B44E900517D71 /* Artist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artist+CoreDataClass.swift"; sourceTree = "<group>"; };
 		04286063237B44E900517D71 /* Artist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artist+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		04C2A6AE237CE435007D541B /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 		B47884FB5272F6D12281751D /* Pods-SongMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongMaps.release.xcconfig"; path = "Target Support Files/Pods-SongMaps/Pods-SongMaps.release.xcconfig"; sourceTree = "<group>"; };
 		CBDEF4C728A3AD90CF64D7C8 /* Pods_SongMaps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SongMaps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD5E3A91216F964AB2B6672E /* Pods-SongMaps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongMaps.debug.xcconfig"; path = "Target Support Files/Pods-SongMaps/Pods-SongMaps.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				04286053237A74ED00517D71 /* FluidBackgroundView.swift */,
 				04286055237A80E700517D71 /* RoundedButton.swift */,
 				04286057237B400000517D71 /* LastFM.swift */,
+				04C2A6AE237CE435007D541B /* Spotify.swift */,
 				0428605F237B43E300517D71 /* model.xcdatamodeld */,
 				04076C39237A526400F2DDC4 /* Main.storyboard */,
 				04076C3C237A526600F2DDC4 /* Assets.xcassets */,
@@ -101,7 +104,6 @@
 				DD5E3A91216F964AB2B6672E /* Pods-SongMaps.debug.xcconfig */,
 				B47884FB5272F6D12281751D /* Pods-SongMaps.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -235,6 +237,7 @@
 				04076C38237A526400F2DDC4 /* LoginViewController.swift in Sources */,
 				04286056237A80E700517D71 /* RoundedButton.swift in Sources */,
 				04286061237B43E300517D71 /* model.xcdatamodeld in Sources */,
+				04C2A6AF237CE435007D541B /* Spotify.swift in Sources */,
 				04076C34237A526400F2DDC4 /* AppDelegate.swift in Sources */,
 				04076C36237A526400F2DDC4 /* SceneDelegate.swift in Sources */,
 				04286054237A74ED00517D71 /* FluidBackgroundView.swift in Sources */,

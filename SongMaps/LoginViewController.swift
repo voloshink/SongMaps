@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var spotifyButton: RoundedButton!
     @IBOutlet weak var manualButton: RoundedButton!
     
+    let spotify = Spotify()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,23 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+    }
+    
+    func spotifyAuthResponse(code: String, state: String, error: String?) {
+        if let error = error {
+            // handle error
+            // reset gradient
+            return
+        }
+
+        spotify.authorizationResponse(code: code, state: state, progress: { progress in
+            print("Progress " + String(progress))
+            }, completion: { artists in
+            print("Success!")
+            print(artists)
+        }, error: { err in
+            print(err)
+        })
     }
     
     @IBAction func lastFMTap(_ sender: Any) {
@@ -49,6 +68,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func spotifyTap(_ sender: Any) {
          self.backgroundView.updateGradient(with: UIColor.green, followed: UIColor.black)
+        
+        spotify.authorize()
     }
     
     @IBAction func manualTap(_ sender: Any) {
