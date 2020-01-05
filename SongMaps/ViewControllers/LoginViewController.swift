@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, Storyboarded {
     
     @IBOutlet var backgroundView: FluidBackgroundView!
     @IBOutlet weak var lastFMButton: RoundedButton!

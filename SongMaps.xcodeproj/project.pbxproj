@@ -17,10 +17,24 @@
 		04286056237A80E700517D71 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286055237A80E700517D71 /* RoundedButton.swift */; };
 		04286058237B400000517D71 /* LastFM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286057237B400000517D71 /* LastFM.swift */; };
 		0428605E237B424B00517D71 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0428605D237B424B00517D71 /* keys.plist */; };
-		04286061237B43E300517D71 /* model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0428605F237B43E300517D71 /* model.xcdatamodeld */; };
+		04286061237B43E300517D71 /* SongMaps.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0428605F237B43E300517D71 /* SongMaps.xcdatamodeld */; };
 		04286064237B44E900517D71 /* Artist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286062237B44E900517D71 /* Artist+CoreDataClass.swift */; };
 		04286065237B44E900517D71 /* Artist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286063237B44E900517D71 /* Artist+CoreDataProperties.swift */; };
+		049143BC23A7623F002D664E /* LocationRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049143BB23A7623F002D664E /* LocationRequestViewController.swift */; };
+		049143BE23A76A49002D664E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049143BD23A76A49002D664E /* Settings.swift */; };
+		04AA1BDD23A774CA00F9B145 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA1BDC23A774CA00F9B145 /* TabBarViewController.swift */; };
+		04AA1BDF23A7765800F9B145 /* Ticketmaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA1BDE23A7765800F9B145 /* Ticketmaster.swift */; };
+		04AA1BE123A78F9400F9B145 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA1BE023A78F9400F9B145 /* Coordinator.swift */; };
+		04AA1BE323A78FBD00F9B145 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA1BE223A78FBD00F9B145 /* Storyboarded.swift */; };
+		04AA1BE523A7910C00F9B145 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA1BE423A7910C00F9B145 /* MainCoordinator.swift */; };
+		04AA1BE723A7A5FB00F9B145 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA1BE623A7A5FB00F9B145 /* EventTableViewController.swift */; };
+		04AA1BE923A7A63400F9B145 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA1BE823A7A63400F9B145 /* EventTableViewCell.swift */; };
 		04C2A6AF237CE435007D541B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2A6AE237CE435007D541B /* Spotify.swift */; };
+		04D00E1623A5F01E0016233E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D00E1523A5F01E0016233E /* MapViewController.swift */; };
+		04D00E1823A5F2190016233E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D00E1723A5F2190016233E /* Event.swift */; };
+		04D00E1A23A60C7A0016233E /* Geohash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D00E1923A60C7A0016233E /* Geohash.swift */; };
+		04EAC37123C289A700398C90 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EAC36F23C289A700398C90 /* Event+CoreDataClass.swift */; };
+		04EAC37223C289A700398C90 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EAC37023C289A700398C90 /* Event+CoreDataProperties.swift */; };
 		F9080E57B05674B33FA7174A /* Pods_SongMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBDEF4C728A3AD90CF64D7C8 /* Pods_SongMaps.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +54,21 @@
 		04286060237B43E300517D71 /* Artist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Artist.xcdatamodel; sourceTree = "<group>"; };
 		04286062237B44E900517D71 /* Artist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artist+CoreDataClass.swift"; sourceTree = "<group>"; };
 		04286063237B44E900517D71 /* Artist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artist+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		049143BB23A7623F002D664E /* LocationRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequestViewController.swift; sourceTree = "<group>"; };
+		049143BD23A76A49002D664E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		04AA1BDC23A774CA00F9B145 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		04AA1BDE23A7765800F9B145 /* Ticketmaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticketmaster.swift; sourceTree = "<group>"; };
+		04AA1BE023A78F9400F9B145 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		04AA1BE223A78FBD00F9B145 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		04AA1BE423A7910C00F9B145 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		04AA1BE623A7A5FB00F9B145 /* EventTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
+		04AA1BE823A7A63400F9B145 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		04C2A6AE237CE435007D541B /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
+		04D00E1523A5F01E0016233E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		04D00E1723A5F2190016233E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		04D00E1923A60C7A0016233E /* Geohash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geohash.swift; sourceTree = "<group>"; };
+		04EAC36F23C289A700398C90 /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
+		04EAC37023C289A700398C90 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B47884FB5272F6D12281751D /* Pods-SongMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongMaps.release.xcconfig"; path = "Target Support Files/Pods-SongMaps/Pods-SongMaps.release.xcconfig"; sourceTree = "<group>"; };
 		CBDEF4C728A3AD90CF64D7C8 /* Pods_SongMaps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SongMaps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD5E3A91216F964AB2B6672E /* Pods-SongMaps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SongMaps.debug.xcconfig"; path = "Target Support Files/Pods-SongMaps/Pods-SongMaps.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,23 +107,85 @@
 		04076C32237A526400F2DDC4 /* SongMaps */ = {
 			isa = PBXGroup;
 			children = (
-				04286062237B44E900517D71 /* Artist+CoreDataClass.swift */,
-				04286063237B44E900517D71 /* Artist+CoreDataProperties.swift */,
-				04076C33237A526400F2DDC4 /* AppDelegate.swift */,
-				04076C35237A526400F2DDC4 /* SceneDelegate.swift */,
-				04076C37237A526400F2DDC4 /* LoginViewController.swift */,
-				04286053237A74ED00517D71 /* FluidBackgroundView.swift */,
-				04286055237A80E700517D71 /* RoundedButton.swift */,
-				04286057237B400000517D71 /* LastFM.swift */,
-				04C2A6AE237CE435007D541B /* Spotify.swift */,
-				0428605F237B43E300517D71 /* model.xcdatamodeld */,
+				049143BF23A76D35002D664E /* Models */,
+				049143BA23A76212002D664E /* UI Classes */,
+				049143B923A76205002D664E /* Delegates */,
+				049143B723A761D9002D664E /* Extensions */,
+				049143B623A761C9002D664E /* Services */,
+				049143B823A761E6002D664E /* ViewControllers */,
+				0428605F237B43E300517D71 /* SongMaps.xcdatamodeld */,
+				04AA1BE023A78F9400F9B145 /* Coordinator.swift */,
+				04AA1BE423A7910C00F9B145 /* MainCoordinator.swift */,
+				04AA1BE223A78FBD00F9B145 /* Storyboarded.swift */,
 				04076C39237A526400F2DDC4 /* Main.storyboard */,
 				04076C3C237A526600F2DDC4 /* Assets.xcassets */,
 				04076C3E237A526600F2DDC4 /* LaunchScreen.storyboard */,
 				04076C41237A526600F2DDC4 /* Info.plist */,
 				0428605D237B424B00517D71 /* keys.plist */,
+				04D00E1723A5F2190016233E /* Event.swift */,
+				04D00E1923A60C7A0016233E /* Geohash.swift */,
 			);
 			path = SongMaps;
+			sourceTree = "<group>";
+		};
+		049143B623A761C9002D664E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				04286057237B400000517D71 /* LastFM.swift */,
+				04C2A6AE237CE435007D541B /* Spotify.swift */,
+				04AA1BDE23A7765800F9B145 /* Ticketmaster.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		049143B723A761D9002D664E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				04EAC36F23C289A700398C90 /* Event+CoreDataClass.swift */,
+				04EAC37023C289A700398C90 /* Event+CoreDataProperties.swift */,
+				04286062237B44E900517D71 /* Artist+CoreDataClass.swift */,
+				04286063237B44E900517D71 /* Artist+CoreDataProperties.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		049143B823A761E6002D664E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				049143BB23A7623F002D664E /* LocationRequestViewController.swift */,
+				04076C37237A526400F2DDC4 /* LoginViewController.swift */,
+				04D00E1523A5F01E0016233E /* MapViewController.swift */,
+				04AA1BDC23A774CA00F9B145 /* TabBarViewController.swift */,
+				04AA1BE623A7A5FB00F9B145 /* EventTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		049143B923A76205002D664E /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				04076C33237A526400F2DDC4 /* AppDelegate.swift */,
+				04076C35237A526400F2DDC4 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		049143BA23A76212002D664E /* UI Classes */ = {
+			isa = PBXGroup;
+			children = (
+				04286053237A74ED00517D71 /* FluidBackgroundView.swift */,
+				04286055237A80E700517D71 /* RoundedButton.swift */,
+				04AA1BE823A7A63400F9B145 /* EventTableViewCell.swift */,
+			);
+			path = "UI Classes";
+			sourceTree = "<group>";
+		};
+		049143BF23A76D35002D664E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				049143BD23A76A49002D664E /* Settings.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7332196697320ABCD34E1415 /* Pods */ = {
@@ -231,15 +321,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04AA1BDD23A774CA00F9B145 /* TabBarViewController.swift in Sources */,
+				04D00E1623A5F01E0016233E /* MapViewController.swift in Sources */,
 				04286064237B44E900517D71 /* Artist+CoreDataClass.swift in Sources */,
+				04AA1BDF23A7765800F9B145 /* Ticketmaster.swift in Sources */,
+				04AA1BE723A7A5FB00F9B145 /* EventTableViewController.swift in Sources */,
 				04286058237B400000517D71 /* LastFM.swift in Sources */,
+				04EAC37223C289A700398C90 /* Event+CoreDataProperties.swift in Sources */,
 				04286065237B44E900517D71 /* Artist+CoreDataProperties.swift in Sources */,
+				04D00E1823A5F2190016233E /* Event.swift in Sources */,
 				04076C38237A526400F2DDC4 /* LoginViewController.swift in Sources */,
+				04AA1BE123A78F9400F9B145 /* Coordinator.swift in Sources */,
 				04286056237A80E700517D71 /* RoundedButton.swift in Sources */,
-				04286061237B43E300517D71 /* model.xcdatamodeld in Sources */,
+				04286061237B43E300517D71 /* SongMaps.xcdatamodeld in Sources */,
+				04AA1BE923A7A63400F9B145 /* EventTableViewCell.swift in Sources */,
 				04C2A6AF237CE435007D541B /* Spotify.swift in Sources */,
+				049143BE23A76A49002D664E /* Settings.swift in Sources */,
+				04AA1BE523A7910C00F9B145 /* MainCoordinator.swift in Sources */,
 				04076C34237A526400F2DDC4 /* AppDelegate.swift in Sources */,
+				04D00E1A23A60C7A0016233E /* Geohash.swift in Sources */,
+				049143BC23A7623F002D664E /* LocationRequestViewController.swift in Sources */,
+				04EAC37123C289A700398C90 /* Event+CoreDataClass.swift in Sources */,
 				04076C36237A526400F2DDC4 /* SceneDelegate.swift in Sources */,
+				04AA1BE323A78FBD00F9B145 /* Storyboarded.swift in Sources */,
 				04286054237A74ED00517D71 /* FluidBackgroundView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,13 +546,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		0428605F237B43E300517D71 /* model.xcdatamodeld */ = {
+		0428605F237B43E300517D71 /* SongMaps.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				04286060237B43E300517D71 /* Artist.xcdatamodel */,
 			);
 			currentVersion = 04286060237B43E300517D71 /* Artist.xcdatamodel */;
-			path = model.xcdatamodeld;
+			path = SongMaps.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
