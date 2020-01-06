@@ -31,9 +31,23 @@ class Settings {
         }
     }
     
+    var lat: Double {
+        didSet {
+            defaults.set(lat, forKey: Keys.lat)
+        }
+    }
+    
+    var long: Double {
+        didSet {
+            defaults.set(long, forKey: Keys.long)
+        }
+    }
+    
     struct Keys {
         static let radius = "radius"
         static let location = "location"
+        static let lat = "lat"
+        static let long = "long"
         static let launchedBefore = "launchedBefore"
     }
     
@@ -47,5 +61,17 @@ class Settings {
         location = defaults.string(forKey: Keys.location)
         
         launchedBefore = defaults.bool(forKey: Keys.launchedBefore)
+        
+        if let lat = defaults.object(forKey: Keys.lat) as? Double {
+            self.lat = lat
+        } else {
+            self.lat = 0
+        }
+        
+        if let long = defaults.object(forKey: Keys.long) as? Double {
+            self.long = long
+        } else {
+            self.long = 0
+        }
     }
 }

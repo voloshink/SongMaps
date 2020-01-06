@@ -214,14 +214,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="160" id="2Xx-az-vcI">
-                                <rect key="frame" x="0.0" y="28" width="414" height="160"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTableViewCell" rowHeight="300" id="2Xx-az-vcI" customClass="EventTableViewCell" customModule="SongMaps" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Xx-az-vcI" id="quv-Fw-Nv3">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGg-Sm-weF">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="sGg-Sm-weF">
                                             <rect key="frame" x="20" y="16" width="91" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -233,53 +233,61 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gQo-IX-OMF">
-                                            <rect key="frame" x="166.5" y="16" width="227.5" height="128"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="gQo-IX-OMF" secondAttribute="height" multiplier="16:9" id="X6h-Kz-aZQ"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sq8-FS-hCl">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Venue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Sq8-FS-hCl">
                                             <rect key="frame" x="20" y="68" width="48" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lG-kH-Tzo">
-                                            <rect key="frame" x="20" y="94" width="67" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lG-kH-Tzo">
+                                            <rect key="frame" x="327" y="68" width="67" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tA2-D5-GiX">
-                                            <rect key="frame" x="20" y="120" width="90" height="30"/>
+                                            <rect key="frame" x="162" y="265" width="90" height="30"/>
                                             <state key="normal" title="Ticketmaster"/>
+                                            <connections>
+                                                <action selector="ticketmasterButtonTap:" destination="2Xx-az-vcI" eventType="touchUpInside" id="8jU-Xd-Ujk"/>
+                                            </connections>
                                         </button>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gQo-IX-OMF">
+                                            <rect key="frame" x="57" y="91" width="300" height="169"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="gQo-IX-OMF" secondAttribute="height" multiplier="16:9" id="X6h-Kz-aZQ"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="gQo-IX-OMF" firstAttribute="top" secondItem="quv-Fw-Nv3" secondAttribute="topMargin" constant="5" id="1QI-xj-sNn"/>
-                                        <constraint firstItem="gQo-IX-OMF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Sq8-FS-hCl" secondAttribute="trailing" constant="8" symbolic="YES" id="Di8-C7-ifd"/>
-                                        <constraint firstItem="9lG-kH-Tzo" firstAttribute="top" secondItem="Sq8-FS-hCl" secondAttribute="bottom" constant="5" id="DzN-jL-ybO"/>
-                                        <constraint firstItem="gQo-IX-OMF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zGo-oU-Qwg" secondAttribute="trailing" constant="8" symbolic="YES" id="Foz-8w-TSD"/>
-                                        <constraint firstItem="gQo-IX-OMF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9lG-kH-Tzo" secondAttribute="trailing" constant="8" symbolic="YES" id="G9g-so-Oje"/>
-                                        <constraint firstItem="zGo-oU-Qwg" firstAttribute="top" secondItem="sGg-Sm-weF" secondAttribute="bottom" constant="5" id="GgC-4R-RnU"/>
-                                        <constraint firstItem="tA2-D5-GiX" firstAttribute="top" secondItem="9lG-kH-Tzo" secondAttribute="bottom" constant="5" id="IPB-1E-oZ5"/>
-                                        <constraint firstItem="tA2-D5-GiX" firstAttribute="leading" secondItem="quv-Fw-Nv3" secondAttribute="leadingMargin" id="P2b-V1-I9W"/>
-                                        <constraint firstItem="Sq8-FS-hCl" firstAttribute="leading" secondItem="quv-Fw-Nv3" secondAttribute="leadingMargin" id="RlQ-C2-r4U"/>
-                                        <constraint firstItem="9lG-kH-Tzo" firstAttribute="leading" secondItem="quv-Fw-Nv3" secondAttribute="leadingMargin" id="Ss0-Us-lhT"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="gQo-IX-OMF" secondAttribute="bottom" constant="5" id="WmD-gQ-TNQ"/>
-                                        <constraint firstItem="zGo-oU-Qwg" firstAttribute="leading" secondItem="quv-Fw-Nv3" secondAttribute="leadingMargin" id="bMB-Py-i2i"/>
-                                        <constraint firstItem="gQo-IX-OMF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sGg-Sm-weF" secondAttribute="trailing" constant="8" symbolic="YES" id="cGf-6b-sLf"/>
-                                        <constraint firstItem="Sq8-FS-hCl" firstAttribute="top" secondItem="zGo-oU-Qwg" secondAttribute="bottom" constant="5" id="gTD-QC-beY"/>
-                                        <constraint firstItem="gQo-IX-OMF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tA2-D5-GiX" secondAttribute="trailing" constant="8" symbolic="YES" id="opo-Ux-bEf"/>
-                                        <constraint firstItem="sGg-Sm-weF" firstAttribute="leading" secondItem="quv-Fw-Nv3" secondAttribute="leadingMargin" id="q4X-2o-lsW"/>
-                                        <constraint firstItem="gQo-IX-OMF" firstAttribute="trailing" secondItem="quv-Fw-Nv3" secondAttribute="trailingMargin" id="uB6-3o-fbF"/>
-                                        <constraint firstItem="sGg-Sm-weF" firstAttribute="top" secondItem="quv-Fw-Nv3" secondAttribute="topMargin" constant="5" id="uDP-zv-f8E"/>
+                                        <constraint firstItem="Sq8-FS-hCl" firstAttribute="leading" secondItem="quv-Fw-Nv3" secondAttribute="leadingMargin" id="0eg-OB-Bxb"/>
+                                        <constraint firstItem="9lG-kH-Tzo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Sq8-FS-hCl" secondAttribute="trailing" constant="2" id="1KE-tY-eov"/>
+                                        <constraint firstItem="sGg-Sm-weF" firstAttribute="top" secondItem="quv-Fw-Nv3" secondAttribute="topMargin" constant="5" id="2JX-TF-Ha9"/>
+                                        <constraint firstItem="9lG-kH-Tzo" firstAttribute="centerY" secondItem="Sq8-FS-hCl" secondAttribute="centerY" id="8Lo-g1-PFF"/>
+                                        <constraint firstItem="sGg-Sm-weF" firstAttribute="leading" secondItem="quv-Fw-Nv3" secondAttribute="leadingMargin" id="CEh-SE-JFT"/>
+                                        <constraint firstItem="tA2-D5-GiX" firstAttribute="centerX" secondItem="quv-Fw-Nv3" secondAttribute="centerX" id="CTy-9A-xW1"/>
+                                        <constraint firstItem="gQo-IX-OMF" firstAttribute="top" secondItem="Sq8-FS-hCl" secondAttribute="bottom" constant="2" id="Fkx-8o-AOF"/>
+                                        <constraint firstItem="9lG-kH-Tzo" firstAttribute="trailing" secondItem="quv-Fw-Nv3" secondAttribute="trailingMargin" id="MgC-Mr-G9L"/>
+                                        <constraint firstItem="tA2-D5-GiX" firstAttribute="top" secondItem="gQo-IX-OMF" secondAttribute="bottom" constant="5" id="Mr3-nl-leb"/>
+                                        <constraint firstItem="gQo-IX-OMF" firstAttribute="centerX" secondItem="quv-Fw-Nv3" secondAttribute="centerX" id="NFj-3C-0N8"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sGg-Sm-weF" secondAttribute="trailing" constant="20" symbolic="YES" id="VpI-9h-ecB"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zGo-oU-Qwg" secondAttribute="trailing" constant="20" symbolic="YES" id="ctP-KV-Rs2"/>
+                                        <constraint firstItem="Sq8-FS-hCl" firstAttribute="top" secondItem="zGo-oU-Qwg" secondAttribute="bottom" constant="5" id="fT7-Uc-4X6"/>
+                                        <constraint firstAttribute="bottom" secondItem="tA2-D5-GiX" secondAttribute="bottom" constant="5" id="pEo-du-C4p"/>
+                                        <constraint firstItem="zGo-oU-Qwg" firstAttribute="top" secondItem="sGg-Sm-weF" secondAttribute="bottom" constant="5" id="umu-5W-VQ4"/>
+                                        <constraint firstItem="zGo-oU-Qwg" firstAttribute="leading" secondItem="quv-Fw-Nv3" secondAttribute="leadingMargin" id="z29-YX-Zc7"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLabel" destination="zGo-oU-Qwg" id="tSB-s7-SNF"/>
+                                    <outlet property="distanceLabel" destination="9lG-kH-Tzo" id="Kda-Qn-tN6"/>
+                                    <outlet property="eventImage" destination="gQo-IX-OMF" id="Ivj-L3-p3s"/>
+                                    <outlet property="nameLabel" destination="sGg-Sm-weF" id="Etp-4V-D0X"/>
+                                    <outlet property="venuNameLabel" destination="Sq8-FS-hCl" id="leG-53-QCD"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="empty" rowHeight="70" id="omh-Rr-tei">
-                                <rect key="frame" x="0.0" y="188" width="414" height="70"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmptyTableViewCell" rowHeight="70" id="omh-Rr-tei">
+                                <rect key="frame" x="0.0" y="328" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="omh-Rr-tei" id="nwK-mV-JbN">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
@@ -307,6 +315,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="nFX-a5-bFz"/>
+                    <connections>
+                        <outlet property="tableView" destination="QWP-Zw-EIb" id="iWS-h7-ebY"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUT-6H-5SJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

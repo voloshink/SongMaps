@@ -76,8 +76,9 @@ class Ticketmaster {
     private func parseEvents(json: [JSON]) -> [Event] {
         var events = [Event]()
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
+        let dateFormatter = ISO8601DateFormatter()
         
         for event in json {
             let name = event["name"].string ?? "Event"

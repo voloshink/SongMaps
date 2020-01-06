@@ -8,8 +8,10 @@
 
 import UIKit
 
-class EventTableViewController: UITableViewController {
-
+class EventTableViewController: UITableViewController, EventHandler {
+    
+    var events = [Event]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,18 +29,36 @@ class EventTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if events.count > 0 {
+            return events.count
+        } else {
+            return 1
+        }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if events.count > 0 {
+            return 300
+        } else {
+            return 100
+        }
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        guard events.count != 0 else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyTableViewCell", for: indexPath)
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath)
 
-        // Configure the cell...
+        let eventTableViewCell = cell as! EventTableViewCell
+        eventTableViewCell.configureCell(event: events[indexPath.row])
 
-        return cell
+        return eventTableViewCell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -84,5 +104,13 @@ class EventTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - EventHandler
+    
+    func newEvents(events: [Event]) {
+        print("got events")
+        self.events = events
+        tableView.reloadData()
+    }
 
 }

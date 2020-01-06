@@ -23,10 +23,11 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initializeCoreData()
+        loadEvents()
         print("Did load!")
         locationManager.delegate = self
         
-        initializeCoreData()
         ticketmaster = Ticketmaster(container: container)
         if !firstLaunch {
             print("requesting location")
@@ -46,6 +47,9 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("location manager error VVV")
         print(error)
+        // TODO
+        settings.lat = 42.380199
+        settings.long = -71.134697
         guard let error = error as? CLError else {
             return
         }
@@ -68,8 +72,10 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
         guard let location = locations.first else {
             return
         }
-
+        print("Got location")
         settings.location = location.coordinate.geohash(length: 10)
+        settings.lat = location.coordinate.latitude
+        settings.long = location.coordinate.longitude
         getEvents()
     }
     
@@ -77,13 +83,14 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     private func initializeCoreData() {
         container = NSPersistentContainer(name: "SongMaps")
         container.loadPersistentStores { storeDescription, error in
+            self.container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
             if let error = error {
                 print("Unresolved error \(error)")
             }
         }
     }
     
-    func saveContext() {
+    private func saveContext() {
         guard let container = container else {
             return
         }
@@ -97,14 +104,39 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
         }
     }
     
+    private func loadEvents() {
+        let request = Event.createFetchRequest()
+        let sort = NSSortDescriptor(key: "date", ascending: true)
+        request.sortDescriptors = [sort]
+
+        do {
+            events = try container.viewContext.fetch(request)
+            print("Got \(events.count) events")
+            guard let viewControllers = self.viewControllers else {
+                return
+            }
+            for case let viewController as EventHandler in viewControllers {
+                viewController.newEvents(events: events)
+            }
+        } catch {
+            print("Fetch failed")
+        }
+    }
+    
     // MARK: - Private
     private func getEvents() {
         //        ticketmaster.getNewEvents(location: settings.location!, radius: settings.radius)
         ticketmaster.getNewEvents(geoPoint: "drt2zp2mr", radius: 100, completion: { events in
             print(events.count)
             print(events[0])
+            self.saveContext()
+            self.loadEvents()
         }, error: {error in
             print(error)
         })
     }
+}
+
+protocol EventHandler {
+    func newEvents(events: [Event])
 }

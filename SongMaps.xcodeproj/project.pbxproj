@@ -31,7 +31,6 @@
 		04AA1BE923A7A63400F9B145 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA1BE823A7A63400F9B145 /* EventTableViewCell.swift */; };
 		04C2A6AF237CE435007D541B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2A6AE237CE435007D541B /* Spotify.swift */; };
 		04D00E1623A5F01E0016233E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D00E1523A5F01E0016233E /* MapViewController.swift */; };
-		04D00E1823A5F2190016233E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D00E1723A5F2190016233E /* Event.swift */; };
 		04D00E1A23A60C7A0016233E /* Geohash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D00E1923A60C7A0016233E /* Geohash.swift */; };
 		04EAC37123C289A700398C90 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EAC36F23C289A700398C90 /* Event+CoreDataClass.swift */; };
 		04EAC37223C289A700398C90 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EAC37023C289A700398C90 /* Event+CoreDataProperties.swift */; };
@@ -65,7 +64,6 @@
 		04AA1BE823A7A63400F9B145 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		04C2A6AE237CE435007D541B /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 		04D00E1523A5F01E0016233E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		04D00E1723A5F2190016233E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		04D00E1923A60C7A0016233E /* Geohash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geohash.swift; sourceTree = "<group>"; };
 		04EAC36F23C289A700398C90 /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
 		04EAC37023C289A700398C90 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 				04076C3E237A526600F2DDC4 /* LaunchScreen.storyboard */,
 				04076C41237A526600F2DDC4 /* Info.plist */,
 				0428605D237B424B00517D71 /* keys.plist */,
-				04D00E1723A5F2190016233E /* Event.swift */,
 				04D00E1923A60C7A0016233E /* Geohash.swift */,
 			);
 			path = SongMaps;
@@ -154,8 +151,8 @@
 			children = (
 				049143BB23A7623F002D664E /* LocationRequestViewController.swift */,
 				04076C37237A526400F2DDC4 /* LoginViewController.swift */,
-				04D00E1523A5F01E0016233E /* MapViewController.swift */,
 				04AA1BDC23A774CA00F9B145 /* TabBarViewController.swift */,
+				04D00E1523A5F01E0016233E /* MapViewController.swift */,
 				04AA1BE623A7A5FB00F9B145 /* EventTableViewController.swift */,
 			);
 			path = ViewControllers;
@@ -329,7 +326,6 @@
 				04286058237B400000517D71 /* LastFM.swift in Sources */,
 				04EAC37223C289A700398C90 /* Event+CoreDataProperties.swift in Sources */,
 				04286065237B44E900517D71 /* Artist+CoreDataProperties.swift in Sources */,
-				04D00E1823A5F2190016233E /* Event.swift in Sources */,
 				04076C38237A526400F2DDC4 /* LoginViewController.swift in Sources */,
 				04AA1BE123A78F9400F9B145 /* Coordinator.swift in Sources */,
 				04286056237A80E700517D71 /* RoundedButton.swift in Sources */,
