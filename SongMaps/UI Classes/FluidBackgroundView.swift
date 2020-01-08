@@ -75,6 +75,10 @@ class FluidBackgroundView: UIView {
         gradientSet[nextIndex] = [currentSet[1], color.cgColor]
         delayedGradientUpdate = [[color.cgColor, by.cgColor], [by.cgColor, color.cgColor]]
     }
+    
+    func resetToDefault() {
+        updateGradient(with: .orange, followed: .blue)
+    }
 }
 
 extension FluidBackgroundView: CAAnimationDelegate {

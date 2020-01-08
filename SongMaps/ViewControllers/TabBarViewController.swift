@@ -19,11 +19,13 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     var firstLaunch = false
     var locationRequestRejected = false
     var events = [Event]()
+    var artists = [Artist]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initializeCoreData()
+        loadArtists()
         loadEvents()
         print("Did load!")
         locationManager.delegate = self
@@ -120,6 +122,17 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
             }
         } catch {
             print("Fetch failed")
+        }
+    }
+    
+    private func loadArtists() {
+        let request = Artist.createFetchRequest()
+        
+        do {
+            artists = try container.viewContext.fetch(request)
+            print("Got \(artists.count) artists")
+        } catch {
+            print("Fetch Failed")
         }
     }
     

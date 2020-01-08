@@ -13,7 +13,7 @@ import CoreData
 
 extension Artist {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Artist> {
+    @nonobjc public class func createFetchRequest() -> NSFetchRequest<Artist> {
         return NSFetchRequest<Artist>(entityName: "Artist")
     }
 

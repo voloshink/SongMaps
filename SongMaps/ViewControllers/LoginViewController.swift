@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class LoginViewController: UIViewController, Storyboarded {
     
@@ -15,59 +16,169 @@ class LoginViewController: UIViewController, Storyboarded {
     @IBOutlet weak var spotifyButton: RoundedButton!
     @IBOutlet weak var manualButton: RoundedButton!
     
+    var container: NSPersistentContainer!
+    
     let spotify = Spotify()
+    let lastFM = LastFM()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        initializeCoreData()
     }
 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        manualButton.isHidden = true
     }
     
     func spotifyAuthResponse(code: String, state: String, error: String?) {
         if let error = error {
-            // handle error
-            // reset gradient
+            print(error)
+            showErrorAlert(error: "Authentication Error")
             return
         }
 
         spotify.authorizationResponse(code: code, state: state, progress: { progress in
-            print("Progress " + String(progress))
+            var percentage = Int(progress * 100)
+            if percentage > 100 {
+                percentage = 100
+            }
+            self.spotifyButton.setTitle(String(percentage) + "%", for: .normal)
+            
             }, completion: { artists in
-            print("Success!")
-            print(artists)
+                self.parseArtists(service: "Spotify", artists: artists)
         }, error: { err in
-            print(err)
+            self.showErrorAlert(error: err)
         })
     }
     
-    @IBAction func lastFMTap(_ sender: Any) {
-        self.backgroundView.updateGradient(with: UIColor.red, followed: UIColor.white)
-        
+    private func getLastfmAritst(for username: String) {
+        lastFMButton.isEnabled = false
+        spotifyButton.isEnabled = false
         UIView.animate(withDuration: 2.0, animations: {
-//            self.spotifyButton.isHidden = true
             self.spotifyButton.alpha = 0.0
             self.manualButton.isHidden = true
         })
         
-//        let lastFM = LastFM()
-//        lastFM.getArtists(user: "TehPolecat", progress: { progress in
-//            print(progress)
-//        }, completion: { artists in
-//            print(artists)
-//        }, error: {error in
-//            print(error)
-//        })
+        lastFMButton.setTitle("Getting Artists", for: .normal)
         
+        lastFM.getArtists(user: username, progress: { progress in
+            print(progress)
+            
+            var percentage = Int(progress * 100)
+            if percentage > 100 {
+                percentage = 100
+            }
+            self.lastFMButton.setTitle(String(percentage) + "%", for: .normal)
+        }, completion: { artists in
+            self.parseArtists(service: "LastFM", artists: artists)
+        }, error: { error in
+            print(error)
+            self.showErrorAlert(error: error)
+        })
+    }
+    
+    private func showErrorAlert(error: String) {
+        let alert = UIAlertController(title: "We Encountered An Error", message: error, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            self.resetUI()
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func resetUI() {
+        backgroundView.resetToDefault()
+        spotifyButton.alpha = 1
+        spotifyButton.isEnabled = true
+        spotifyButton.setTitle("Spotify", for: .normal)
+        lastFMButton.alpha = 1
+        lastFMButton.isEnabled = true
+        lastFMButton.setTitle("Last.FM", for: .normal)
+    }
+    
+    private func parseArtists(service: String, artists: [String]) {
+        for artistName in artists {
+            let artist = Artist(context: container.viewContext)
+            artist.name = artistName
+            artist.added = Date()
+            artist.source = service
+        }
+        
+        saveContext()
+    }
+    
+    // MARK: - CoreData
+    private func initializeCoreData() {
+        container = NSPersistentContainer(name: "SongMaps")
+        container.loadPersistentStores { storeDescription, error in
+            self.container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            if let error = error {
+                print("Unresolved error \(error)")
+            }
+        }
+    }
+    
+    private func saveContext() {
+        guard let container = container else {
+            return
+        }
+
+        if container.viewContext.hasChanges {
+            do {
+                try container.viewContext.save()
+            } catch {
+                print("An error occurred while saving: \(error)")
+            }
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func lastFMTap(_ sender: Any) {
+        self.backgroundView.updateGradient(with: UIColor.red, followed: UIColor.white)
+        
+        let alert = UIAlertController(title: "LastFM", message: "Please Enter Your LastFM Username", preferredStyle: .alert)
+
+        alert.addTextField { (textField) in
+            textField.placeholder = "Username"
+        }
+
+        alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] (_) in
+            let textField = alert!.textFields![0]
+            guard let text = textField.text else {
+                self.resetUI()
+                return
+            }
+            
+            guard text != "" else {
+                self.resetUI()
+                return
+            }
+            self.getLastfmAritst(for: text)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            self.resetUI()
+        }))
+
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func spotifyTap(_ sender: Any) {
          self.backgroundView.updateGradient(with: UIColor.green, followed: UIColor.black)
+        
+        spotifyButton.isEnabled = false
+        lastFMButton.isEnabled = false
+        UIView.animate(withDuration: 2.0, animations: {
+            self.lastFMButton.alpha = 0.0
+            self.manualButton.isHidden = true
+        })
+        
+        spotifyButton.setTitle("Getting Artists", for: .normal)
         
         spotify.authorize()
     }
