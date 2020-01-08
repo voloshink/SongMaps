@@ -114,7 +114,6 @@
 				0428605F237B43E300517D71 /* SongMaps.xcdatamodeld */,
 				04AA1BE023A78F9400F9B145 /* Coordinator.swift */,
 				04AA1BE423A7910C00F9B145 /* MainCoordinator.swift */,
-				04AA1BE223A78FBD00F9B145 /* Storyboarded.swift */,
 				04076C39237A526400F2DDC4 /* Main.storyboard */,
 				04076C3C237A526600F2DDC4 /* Assets.xcassets */,
 				04076C3E237A526600F2DDC4 /* LaunchScreen.storyboard */,
@@ -142,6 +141,7 @@
 				04EAC37023C289A700398C90 /* Event+CoreDataProperties.swift */,
 				04286062237B44E900517D71 /* Artist+CoreDataClass.swift */,
 				04286063237B44E900517D71 /* Artist+CoreDataProperties.swift */,
+				04AA1BE223A78FBD00F9B145 /* Storyboarded.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

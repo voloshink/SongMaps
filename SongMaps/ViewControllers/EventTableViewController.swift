@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventTableViewController: UITableViewController, EventHandler {
+class EventTableViewController: UITableViewController, EventHandler, Storyboarded {
     
     var events = [Event]()
     

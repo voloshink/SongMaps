@@ -14,23 +14,19 @@ class LocationRequestViewController: UIViewController, Storyboarded, CLLocationM
     @IBOutlet var backgroundView: FluidBackgroundView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var requestButton: RoundedButton!
+    
+    weak var coordinator: MainCoordinator?
     let locationManager = CLLocationManager()
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if settings.location != nil {
-            performSegue(withIdentifier: "segueToHome", sender: self)
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         locationManager.delegate = self
-        locationManager.requestLocation()
+//        locationManager.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("test")
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             locationManager.requestLocation()
         }
@@ -51,11 +47,16 @@ class LocationRequestViewController: UIViewController, Storyboarded, CLLocationM
         }
 
         settings.location = location.coordinate.geohash(length: 10)
-        print(settings.location!)
-        performSegue(withIdentifier: "segueToHome", sender: self)
+        coordinator?.goToMain()
+        
     }
     
     @IBAction func requestTap(_ sender: UIButton) {
-        locationManager.requestWhenInUseAuthorization()
+        if (CLLocationManager.locationServicesEnabled()) {
+            coordinator?.goToMain()
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        
     }
 }

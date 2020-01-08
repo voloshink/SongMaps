@@ -16,15 +16,20 @@ class LoginViewController: UIViewController, Storyboarded {
     @IBOutlet weak var spotifyButton: RoundedButton!
     @IBOutlet weak var manualButton: RoundedButton!
     
+    weak var coordinator: MainCoordinator?
+    
     var container: NSPersistentContainer!
     
     let spotify = Spotify()
     let lastFM = LastFM()
     
+    var artists = [Artist]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCoreData()
+        loadArtists()
     }
 
     
@@ -80,6 +85,24 @@ class LoginViewController: UIViewController, Storyboarded {
         })
     }
     
+    private func existingArtistsAlert() {
+        let alert = UIAlertController(title: String(artists.count) + " Artists Already On Disk", message: "Would you like to re-add the artists or use the existing ones?", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Delete Artists", style: .destructive, handler: { _ in
+            for artist in self.artists {
+                self.container.viewContext.delete(artist)
+            }
+            
+            self.saveContext()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Use Existing", style: .default, handler: { _ in
+            self.coordinator?.askForLocation()
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     private func showErrorAlert(error: String) {
         let alert = UIAlertController(title: "We Encountered An Error", message: error, preferredStyle: .alert)
 
@@ -109,6 +132,17 @@ class LoginViewController: UIViewController, Storyboarded {
         }
         
         saveContext()
+        coordinator?.askForLocation()
+    }
+    
+    private func loadArtists() {
+        let request = Artist.createFetchRequest()
+        guard let artists = try? container.viewContext.fetch(request) else {
+            return
+        }
+        self.artists = artists
+        existingArtistsAlert()
+        print("Got \(artists.count) artists")
     }
     
     // MARK: - CoreData

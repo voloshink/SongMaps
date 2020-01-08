@@ -15,6 +15,7 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     let locationManager = CLLocationManager()
     var ticketmaster: Ticketmaster!
     var container: NSPersistentContainer!
+    weak var coordinator: MainCoordinator?
     
     var firstLaunch = false
     var locationRequestRejected = false
