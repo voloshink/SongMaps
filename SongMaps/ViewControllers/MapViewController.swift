@@ -19,16 +19,14 @@ class MapViewController: UIViewController, Storyboarded, EventHandler {
         super.viewDidLoad()
         mapView.delegate = self
         
-        print(settings.lat, settings.long)
-        let initialLocation = CLLocation(latitude: settings.lat, longitude: settings.long)
+        // TODO
+        let initialLocation = CLLocation(latitude: 42.36008406, longitude: -71.05890512)
         centerMapOnLocation(location: initialLocation)
         
 //        let event = Event(name: "Temples", venue: "The Sinclair Music Hall", date: Date(), coordinate: CLLocationCoordinate2D(latitude: 42.380199, longitude: -71.134697))
 //         mapView.addAnnotation(event)
         mapView.isZoomEnabled = true
         
-        print("Events")
-        print(events.count)
         for event in events {
             mapView.addAnnotation(event)
         }
@@ -63,8 +61,6 @@ class MapViewController: UIViewController, Storyboarded, EventHandler {
         guard let mapView = mapView else {
             return
         }
-        print("New Events")
-        print(events.count)
         for event in events {
             mapView.addAnnotation(event)
         }
@@ -87,24 +83,18 @@ extension MapViewController: MKMapViewDelegate {
         view.canShowCallout = true
         view.calloutOffset = CGPoint(x: -5, y: 5)
         view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-//        let downloader = ImageDownloader.default
-//        let url = URL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/logo.png")!
-//        downloader.downloadImage(with: url) { result in
-//            switch result {
-//            case .success(let value):
-//                print(value.image)
-//                view.image = value.image
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
     }
     return view
   }
 
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("tap tap!")
-        print(view.annotation as! Event)
+        guard let event = view.annotation as? Event else {
+            return
+        }
+
+        if let url = URL(string: event.url) {
+            UIApplication.shared.open(url)
+        }
     }
 }
 

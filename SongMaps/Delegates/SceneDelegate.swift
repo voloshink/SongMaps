@@ -87,20 +87,48 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
             }
             
-            guard let loginViewController = window?.rootViewController as? LoginViewController else {
+            guard let navigationController = window?.rootViewController as? UINavigationController else {
+                return
+            }
+
+            guard let rootController = navigationController.viewControllers.first else {
                 return
             }
             
-            if let spotifyError = error {
-                loginViewController.spotifyAuthResponse(code: "", state: "", error: spotifyError)
-                return
+            if let loginViewController = rootController as? LoginViewController {
+                if let spotifyError = error {
+                    loginViewController.spotifyAuthResponse(code: "", state: "", error: spotifyError)
+                    return
+                }
+                
+                guard let spotifyCode = code, let spotifyState = state else {
+                    return
+                }
+                
+                loginViewController.spotifyAuthResponse(code: spotifyCode, state: spotifyState, error: nil)
             }
             
-            guard let spotifyCode = code, let spotifyState = state else {
-                return
+            if let tabBarViewController = rootController as? TabBarViewController {
+                guard let controllers = tabBarViewController.viewControllers else {
+                    return
+                }
+                
+                for controller in controllers {
+                    if let settingsController = controller as? SettingsViewController {
+                        if let spotifyError = error {
+                            settingsController.spotifyAuthResponse(code: "", state: "", error: spotifyError)
+                            return
+                        }
+                        
+                        guard let spotifyCode = code, let spotifyState = state else {
+                            return
+                        }
+                        
+                        settingsController.spotifyAuthResponse(code: spotifyCode, state: spotifyState, error: nil)
+                    }
+                }
             }
-            
-            loginViewController.spotifyAuthResponse(code: spotifyCode, state: spotifyState, error: nil)
+        
         }
     }
 

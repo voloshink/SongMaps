@@ -7,9 +7,22 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "SongMaps")
+        container.loadPersistentStores { description, error in
+            container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            if let error = error {
+                print("error loading persistent container")
+            }
+        }
+
+        return container
+    }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

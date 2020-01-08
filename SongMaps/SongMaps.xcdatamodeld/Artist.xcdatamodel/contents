@@ -11,6 +11,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="artists" optional="YES" attributeType="String"/>
         <attribute name="currency" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="distance" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -31,6 +32,6 @@
     </entity>
     <elements>
         <element name="Artist" positionX="-63" positionY="-18" width="128" height="88"/>
-        <element name="Event" positionX="-63" positionY="9" width="128" height="223"/>
+        <element name="Event" positionX="-63" positionY="9" width="128" height="238"/>
     </elements>
 </model>

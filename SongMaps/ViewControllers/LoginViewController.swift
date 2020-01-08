@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, Storyboarded {
     
     weak var coordinator: MainCoordinator?
     
-    var container: NSPersistentContainer!
+    let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     
     let spotify = Spotify()
     let lastFM = LastFM()
@@ -28,7 +28,6 @@ class LoginViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeCoreData()
         loadArtists()
     }
 
@@ -91,6 +90,7 @@ class LoginViewController: UIViewController, Storyboarded {
         alert.addAction(UIAlertAction(title: "Delete Artists", style: .destructive, handler: { _ in
             for artist in self.artists {
                 self.container.viewContext.delete(artist)
+                
             }
             
             self.saveContext()
@@ -141,26 +141,15 @@ class LoginViewController: UIViewController, Storyboarded {
             return
         }
         self.artists = artists
-        existingArtistsAlert()
-        print("Got \(artists.count) artists")
+        if artists.count > 0 {
+            existingArtistsAlert()
+        }
+        
     }
     
     // MARK: - CoreData
-    private func initializeCoreData() {
-        container = NSPersistentContainer(name: "SongMaps")
-        container.loadPersistentStores { storeDescription, error in
-            self.container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            if let error = error {
-                print("Unresolved error \(error)")
-            }
-        }
-    }
     
     private func saveContext() {
-        guard let container = container else {
-            return
-        }
-
         if container.viewContext.hasChanges {
             do {
                 try container.viewContext.save()

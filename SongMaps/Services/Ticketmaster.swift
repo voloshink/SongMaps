@@ -29,7 +29,7 @@ class Ticketmaster {
         }
     }
     
-    func getNewEvents(geoPoint: String, radius: Int, page: Int = 1, events: [JSON] = [JSON](), completion: @escaping ([Event]) -> (), error errorCallback: @escaping (String) -> ()) {
+    func getNewEvents(geoPoint: String, radius: Int, page: Int = 1, progress: @escaping () -> (), completion: @escaping () -> (), error errorCallback: @escaping (String) -> ()) {
         let url = "https://app.ticketmaster.com/discovery/v2/events.json"
         let parameters: [String: String] = [
             "size": String(size),
@@ -46,9 +46,10 @@ class Ticketmaster {
             case .success(let value):
                 let json = JSON(value)
                 let newEvents = json["_embedded"]["events"].arrayValue
-                let allEvents = events + newEvents
                 let totalPages = json["page"]["totalPages"].int ?? 0
                 let currentPage = json["page"]["number"].int ?? 0
+                print("Loaded page " + String(currentPage))
+                self.parseEvents(json: newEvents)
                 if currentPage < totalPages {
                     
                     // TODO
@@ -57,24 +58,34 @@ class Ticketmaster {
 
                     // hard api limit
                     if (self.size * (page + 1) >= 1000) {
-                        completion(self.parseEvents(json: allEvents))
+                        completion()
                     } else {
-                        self.getNewEvents(geoPoint: geoPoint, radius: radius, page: page + 1, completion: completion, error: errorCallback)
+                        progress()
+                        let seconds = 1.0
+                        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                            self.getNewEvents(geoPoint: geoPoint, radius: radius, page: page + 1, progress: progress, completion: completion, error: errorCallback)
+                        }
                     }
                 } else {
-                    completion(self.parseEvents(json: allEvents))
+                    completion()
                 }
                 
             case .failure(let error):
              print(error)
              print(response.request?.url)
-             errorCallback("Error Getting Events")
+             if (response.response?.statusCode == 429) {
+                let seconds = 2.0
+                DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                    self.getNewEvents(geoPoint: geoPoint, radius: radius, page: page, progress: progress, completion: completion, error: errorCallback)
+                }
+             } else {
+                errorCallback("Error Getting Events")
+             }
             }
         }
     }
     
-    private func parseEvents(json: [JSON]) -> [Event] {
-        var events = [Event]()
+    private func parseEvents(json: [JSON]) {
         
 //        let dateFormatter = DateFormatter()
 //        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
@@ -108,6 +119,20 @@ class Ticketmaster {
                 continue
             }
             
+            let attractions = embedded["attractions"].arrayValue
+            guard attractions.count > 0 else {
+                continue
+            }
+            
+            var artists = [String]()
+            for attraction in attractions {
+                guard let artist = attraction["name"].string else {
+                    continue
+                }
+                
+                artists.append(artist)
+            }
+            
             let venue = venues[0]
             let venueName = venue["name"].string ?? "Venue"
             let location  = venue["location"]
@@ -123,14 +148,12 @@ class Ticketmaster {
             e.minPrice = minPrice
             e.maxPrice = maxPrice
             e.currency = currency
-            e.date = startDate
+            e.date = startDate ?? Date()
             e.venue = venueName
             e.lat = lat
             e.long = long
-            events.append(e)
+            e.artists = artists.joined(separator: "|")
         }
-        
-        return events
     }
     
     private func getBiggestImage(json: [JSON]) -> String? {

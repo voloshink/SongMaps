@@ -14,10 +14,10 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     
     let locationManager = CLLocationManager()
     var ticketmaster: Ticketmaster!
-    var container: NSPersistentContainer!
+    let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     weak var coordinator: MainCoordinator?
     
-    var firstLaunch = false
+    var loadingEvents = false
     var locationRequestRejected = false
     var events = [Event]()
     var artists = [Artist]()
@@ -25,17 +25,16 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initializeCoreData()
         loadArtists()
         loadEvents()
-        print("Did load!")
         locationManager.delegate = self
         
         ticketmaster = Ticketmaster(container: container)
-        if !firstLaunch {
+        if settings.launchedBefore {
             print("requesting location")
             locationManager.requestLocation()
         } else {
+            settings.launchedBefore = true
             getEvents()
         }
     }
@@ -83,21 +82,7 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     }
     
     // MARK: - CoreData
-    private func initializeCoreData() {
-        container = NSPersistentContainer(name: "SongMaps")
-        container.loadPersistentStores { storeDescription, error in
-            self.container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            if let error = error {
-                print("Unresolved error \(error)")
-            }
-        }
-    }
-    
-    private func saveContext() {
-        guard let container = container else {
-            return
-        }
-
+    func saveContext() {
         if container.viewContext.hasChanges {
             do {
                 try container.viewContext.save()
@@ -113,20 +98,43 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
         request.sortDescriptors = [sort]
 
         do {
-            events = try container.viewContext.fetch(request)
-            print("Got \(events.count) events")
-            guard let viewControllers = self.viewControllers else {
-                return
-            }
-            for case let viewController as EventHandler in viewControllers {
-                viewController.newEvents(events: events)
+            let unfilteredEvents = try container.viewContext.fetch(request)
+            print("Loaded \(unfilteredEvents.count) unfiltered events from disk")
+            var matchedEvents = [Event]()
+            
+            DispatchQueue.global(qos: .background).async {
+                var artistNames = Set<String>()
+                for artist in self.artists {
+                    artistNames.insert(artist.name.lowercased())
+                }
+
+                for event in unfilteredEvents {
+                    let eventArtists = event.artists.lowercased().components(separatedBy: "|")
+                    for eventArtist in eventArtists {
+                        if (artistNames.contains(eventArtist)) {
+                            matchedEvents.append(event)
+                        }
+                    }
+                }
+
+                DispatchQueue.main.async {
+                    self.events = matchedEvents
+                    print("Matched \(matchedEvents.count) events from disk")
+                    guard let viewControllers = self.viewControllers else {
+                        return
+                    }
+                    
+                    for case let viewController as EventHandler in viewControllers {
+                        viewController.newEvents(events: self.events)
+                    }
+                }
             }
         } catch {
             print("Fetch failed")
         }
     }
     
-    private func loadArtists() {
+    func loadArtists() {
         let request = Artist.createFetchRequest()
         
         do {
@@ -139,14 +147,24 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     
     // MARK: - Private
     private func getEvents() {
+        guard !loadingEvents else {
+            return
+        }
+
+        loadingEvents = true
         //        ticketmaster.getNewEvents(location: settings.location!, radius: settings.radius)
-        ticketmaster.getNewEvents(geoPoint: "drt2zp2mr", radius: 100, completion: { events in
-            print(events.count)
-            print(events[0])
+        ticketmaster.getNewEvents(geoPoint: "drt2zp2mr", radius: 100, progress: {
             self.saveContext()
             self.loadEvents()
+            },
+            completion: {
+            self.saveContext()
+            self.loadEvents()
+            self.loadingEvents = false
         }, error: {error in
+            print("get new events error VV")
             print(error)
+            self.loadingEvents = false
         })
     }
 }

@@ -20,6 +20,7 @@
 		04286061237B43E300517D71 /* SongMaps.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0428605F237B43E300517D71 /* SongMaps.xcdatamodeld */; };
 		04286064237B44E900517D71 /* Artist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286062237B44E900517D71 /* Artist+CoreDataClass.swift */; };
 		04286065237B44E900517D71 /* Artist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286063237B44E900517D71 /* Artist+CoreDataProperties.swift */; };
+		044C06EF23C68E9400F35884 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044C06EE23C68E9400F35884 /* SettingsViewController.swift */; };
 		049143BC23A7623F002D664E /* LocationRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049143BB23A7623F002D664E /* LocationRequestViewController.swift */; };
 		049143BE23A76A49002D664E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049143BD23A76A49002D664E /* Settings.swift */; };
 		04AA1BDD23A774CA00F9B145 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA1BDC23A774CA00F9B145 /* TabBarViewController.swift */; };
@@ -53,6 +54,7 @@
 		04286060237B43E300517D71 /* Artist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Artist.xcdatamodel; sourceTree = "<group>"; };
 		04286062237B44E900517D71 /* Artist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artist+CoreDataClass.swift"; sourceTree = "<group>"; };
 		04286063237B44E900517D71 /* Artist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artist+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		044C06EE23C68E9400F35884 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		049143BB23A7623F002D664E /* LocationRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequestViewController.swift; sourceTree = "<group>"; };
 		049143BD23A76A49002D664E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		04AA1BDC23A774CA00F9B145 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -149,9 +151,10 @@
 		049143B823A761E6002D664E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				049143BB23A7623F002D664E /* LocationRequestViewController.swift */,
 				04076C37237A526400F2DDC4 /* LoginViewController.swift */,
+				049143BB23A7623F002D664E /* LocationRequestViewController.swift */,
 				04AA1BDC23A774CA00F9B145 /* TabBarViewController.swift */,
+				044C06EE23C68E9400F35884 /* SettingsViewController.swift */,
 				04D00E1523A5F01E0016233E /* MapViewController.swift */,
 				04AA1BE623A7A5FB00F9B145 /* EventTableViewController.swift */,
 			);
@@ -341,6 +344,7 @@
 				04076C36237A526400F2DDC4 /* SceneDelegate.swift in Sources */,
 				04AA1BE323A78FBD00F9B145 /* Storyboarded.swift in Sources */,
 				04286054237A74ED00517D71 /* FluidBackgroundView.swift in Sources */,
+				044C06EF23C68E9400F35884 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,7 +26,6 @@ class LocationRequestViewController: UIViewController, Storyboarded, CLLocationM
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("test")
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             locationManager.requestLocation()
         }
