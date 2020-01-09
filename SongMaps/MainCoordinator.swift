@@ -18,7 +18,6 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        print("Launched before \(settings.launchedBefore)")
         if settings.launchedBefore {
             normalLaunch()
         } else {
@@ -36,6 +35,18 @@ class MainCoordinator: Coordinator {
         let vc = TabBarViewController.instantiate()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func spotifyLogin(with url: URL, caller: SpotifyHandler) {
+        let vc = SpotifyViewController.instantiate()
+        vc.coordinator = self
+        vc.handler = caller
+        vc.spotifyURL = url
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func goBack() {
+        _ = navigationController.popViewController(animated: true)
     }
     
     private func normalLaunch() {

@@ -14,6 +14,7 @@
 		04076C3D237A526600F2DDC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04076C3C237A526600F2DDC4 /* Assets.xcassets */; };
 		04076C40237A526600F2DDC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04076C3E237A526600F2DDC4 /* LaunchScreen.storyboard */; };
 		0417FA3323C772F100BBD02B /* Date+-.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417FA3223C772F100BBD02B /* Date+-.swift */; };
+		0417FA3523C7DC6000BBD02B /* SpotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417FA3423C7DC6000BBD02B /* SpotifyViewController.swift */; };
 		04286054237A74ED00517D71 /* FluidBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286053237A74ED00517D71 /* FluidBackgroundView.swift */; };
 		04286056237A80E700517D71 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286055237A80E700517D71 /* RoundedButton.swift */; };
 		04286058237B400000517D71 /* LastFM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04286057237B400000517D71 /* LastFM.swift */; };
@@ -49,6 +50,7 @@
 		04076C3F237A526600F2DDC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04076C41237A526600F2DDC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0417FA3223C772F100BBD02B /* Date+-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+-.swift"; sourceTree = "<group>"; };
+		0417FA3423C7DC6000BBD02B /* SpotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyViewController.swift; sourceTree = "<group>"; };
 		04286053237A74ED00517D71 /* FluidBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluidBackgroundView.swift; sourceTree = "<group>"; };
 		04286055237A80E700517D71 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		04286057237B400000517D71 /* LastFM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFM.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				04076C37237A526400F2DDC4 /* LoginViewController.swift */,
+				0417FA3423C7DC6000BBD02B /* SpotifyViewController.swift */,
 				049143BB23A7623F002D664E /* LocationRequestViewController.swift */,
 				04AA1BDC23A774CA00F9B145 /* TabBarViewController.swift */,
 				044C06EE23C68E9400F35884 /* SettingsViewController.swift */,
@@ -331,6 +334,7 @@
 				04AA1BE723A7A5FB00F9B145 /* EventTableViewController.swift in Sources */,
 				04286058237B400000517D71 /* LastFM.swift in Sources */,
 				04EAC37223C289A700398C90 /* Event+CoreDataProperties.swift in Sources */,
+				0417FA3523C7DC6000BBD02B /* SpotifyViewController.swift in Sources */,
 				04286065237B44E900517D71 /* Artist+CoreDataProperties.swift in Sources */,
 				04076C38237A526400F2DDC4 /* LoginViewController.swift in Sources */,
 				04AA1BE123A78F9400F9B145 /* Coordinator.swift in Sources */,
@@ -494,7 +498,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8CM57Q439Z;
 				INFOPLIST_FILE = SongMaps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -514,7 +518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8CM57Q439Z;
 				INFOPLIST_FILE = SongMaps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

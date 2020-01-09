@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LoginViewController: UIViewController, Storyboarded {
+class LoginViewController: UIViewController, Storyboarded, SpotifyHandler {
     
     @IBOutlet var backgroundView: FluidBackgroundView!
     @IBOutlet weak var lastFMButton: RoundedButton!
@@ -43,6 +43,18 @@ class LoginViewController: UIViewController, Storyboarded {
             showErrorAlert(error: "Authentication Error")
             return
         }
+        
+         self.backgroundView.updateGradient(with: UIColor.green, followed: UIColor.black)
+        
+        spotifyButton.isEnabled = false
+        lastFMButton.isEnabled = false
+        UIView.animate(withDuration: 2.0, animations: {
+            self.lastFMButton.alpha = 0.0
+            self.manualButton.isHidden = true
+        })
+        
+        spotifyButton.setTitle("Getting Artists", for: .normal)
+        
 
         spotify.authorizationResponse(code: code, state: state, progress: { progress in
             var percentage = Int(progress * 100)
@@ -192,18 +204,8 @@ class LoginViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func spotifyTap(_ sender: Any) {
-         self.backgroundView.updateGradient(with: UIColor.green, followed: UIColor.black)
-        
-        spotifyButton.isEnabled = false
-        lastFMButton.isEnabled = false
-        UIView.animate(withDuration: 2.0, animations: {
-            self.lastFMButton.alpha = 0.0
-            self.manualButton.isHidden = true
-        })
-        
-        spotifyButton.setTitle("Getting Artists", for: .normal)
-        
-        spotify.authorize()
+        let url = spotify.authorize()
+        coordinator?.spotifyLogin(with: url, caller: self)
     }
     
     @IBAction func manualTap(_ sender: Any) {

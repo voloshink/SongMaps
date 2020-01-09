@@ -39,8 +39,8 @@ class Spotify {
         state = randomString(length: 64)
     }
     
-    func authorize() {
-        requestAuthorization()
+    func authorize() -> URL {
+        return requestAuthorization()
     }
     
     func authorizationResponse(code: String, state: String, progress: @escaping (Float) -> (), completion: @escaping ([String]) -> (), error: @escaping (String) -> ()) {
@@ -125,6 +125,9 @@ class Spotify {
                     currentProgress = 0.5
                 }
                 
+                if artists.count == 0 && total == 0 {
+                    currentProgress = 0.5
+                }
                 progress(currentProgress / 2)
                 
                 for artist in artists {
@@ -190,6 +193,10 @@ class Spotify {
                 
                 currentProgress += 0.5
                 
+                if artists.count == 0 && total == 0 {
+                    currentProgress = 1
+                }
+                
                 progress(currentProgress)
                 
                 for artist in artists {
@@ -221,18 +228,22 @@ class Spotify {
         }
     }
     
-    private func requestAuthorization() {
+    private func requestAuthorization() -> URL {
         let queryItems = [URLQueryItem(name: "client_id", value: client_id), URLQueryItem(name: "response_type", value: "code"), URLQueryItem(name: "redirect_uri", value: redirectURL),
         URLQueryItem(name: "state", value: state), URLQueryItem(name: "scope", value: "user-follow-read user-top-read")]
         let urlComps = NSURLComponents(string: "https://accounts.spotify.com/authorize")!
         urlComps.queryItems = queryItems
         let url = urlComps.url!
 
-        UIApplication.shared.open(url)
+        return url
     }
     
     private func randomString(length: Int) -> String {
       let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
       return String((0..<length).map{ _ in letters.randomElement()! })
     }
+}
+
+protocol SpotifyHandler {
+    func spotifyAuthResponse(code: String, state: String, error: String?)
 }

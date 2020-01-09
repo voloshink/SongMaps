@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SettingsViewController: UIViewController, Storyboarded {
+class SettingsViewController: UIViewController, Storyboarded, SpotifyHandler {
 
     @IBOutlet weak var lastFMButton: RoundedButton!
     @IBOutlet weak var spotifyButton: RoundedButton!
@@ -193,6 +193,17 @@ class SettingsViewController: UIViewController, Storyboarded {
     }
     
     private func getSpotify() {
+        let url = spotify.authorize()
+        customTabBar.coordinator?.spotifyLogin(with: url, caller: self)
+    }
+    
+    func spotifyAuthResponse(code: String, state: String, error: String?) {
+        if let error = error {
+            print(error)
+            showErrorAlert(error: "Authentication Error")
+            return
+        }
+        
         gradientBackground.updateGradient(with: UIColor.green, followed: UIColor.black)
         
         spotifyButton.isEnabled = false
@@ -202,16 +213,6 @@ class SettingsViewController: UIViewController, Storyboarded {
         })
         
         spotifyButton.setTitle("Getting Artists", for: .normal)
-        
-        spotify.authorize()
-    }
-    
-    func spotifyAuthResponse(code: String, state: String, error: String?) {
-        if let error = error {
-            print(error)
-            showErrorAlert(error: "Authentication Error")
-            return
-        }
 
         spotify.authorizationResponse(code: code, state: state, progress: { progress in
             var percentage = Int(progress * 100)

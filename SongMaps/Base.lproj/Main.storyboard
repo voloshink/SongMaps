@@ -1,12 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Spotify View Controller-->
+        <scene sceneID="cGb-hO-v6W">
+            <objects>
+                <viewController storyboardIdentifier="SpotifyViewController" id="md6-HN-uyT" customClass="SpotifyViewController" customModule="SongMaps" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FYV-Ts-7yL" customClass="FluidBackgroundView" customModule="SongMaps" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGp-Ir-BLN">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qWB-M2-ECQ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem id="umU-3D-V2I">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sDj-gN-TRi">
+                                            <connections>
+                                                <action selector="cancelTap:" destination="md6-HN-uyT" id="RkG-Qd-kRw"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="cT9-39-ihn" firstAttribute="trailing" secondItem="SGp-Ir-BLN" secondAttribute="trailing" id="4u0-pZ-jNx"/>
+                            <constraint firstItem="SGp-Ir-BLN" firstAttribute="leading" secondItem="cT9-39-ihn" secondAttribute="leading" id="7BD-pp-Tlk"/>
+                            <constraint firstItem="SGp-Ir-BLN" firstAttribute="top" secondItem="qWB-M2-ECQ" secondAttribute="bottom" id="9Df-UF-PsP"/>
+                            <constraint firstItem="qWB-M2-ECQ" firstAttribute="trailing" secondItem="cT9-39-ihn" secondAttribute="trailing" id="R0q-Wh-Rvt"/>
+                            <constraint firstItem="cT9-39-ihn" firstAttribute="bottom" secondItem="SGp-Ir-BLN" secondAttribute="bottom" id="VcP-Hr-cvc"/>
+                            <constraint firstItem="qWB-M2-ECQ" firstAttribute="top" secondItem="cT9-39-ihn" secondAttribute="top" id="bjg-PZ-roA"/>
+                            <constraint firstItem="qWB-M2-ECQ" firstAttribute="leading" secondItem="cT9-39-ihn" secondAttribute="leading" id="mE1-FB-Wp3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cT9-39-ihn"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="SGp-Ir-BLN" id="N6q-hc-MTz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eiQ-Z8-Q4u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-159.42028985507247" y="-523.66071428571422"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -86,13 +135,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongMaps requires location information to find concerts near you. Please accept the request to procceed." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDg-nh-M7F">
-                                <rect key="frame" x="20" y="367.5" width="374" height="61"/>
+                                <rect key="frame" x="20" y="367.66666666666669" width="374" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIe-dz-jnK" customClass="RoundedButton" customModule="SongMaps" customModuleProvider="target">
-                                <rect key="frame" x="107" y="458.5" width="200" height="50"/>
+                                <rect key="frame" x="107" y="458.66666666666669" width="200" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="L7h-uC-Fmf"/>
@@ -209,7 +258,7 @@
                                             </connections>
                                         </button>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gQo-IX-OMF">
-                                            <rect key="frame" x="21" y="91" width="372" height="209"/>
+                                            <rect key="frame" x="21.333333333333371" y="91" width="371.33333333333326" height="209"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="gQo-IX-OMF" secondAttribute="height" multiplier="16:9" id="X6h-Kz-aZQ"/>
                                             </constraints>
