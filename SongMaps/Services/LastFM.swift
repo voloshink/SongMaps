@@ -17,6 +17,8 @@ class LastFM {
     let urlTemplate = "https://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=%@&api_key=%@&format=json&limit=%d&page=%d"
     var artists = [String]()
     let apiKey: String
+    var retries = 0
+    let maxRetries = 10
     
     init() {
         if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
@@ -63,12 +65,19 @@ class LastFM {
                     usleep(100000)
                     self.getArtists(user: user, progress: progress, completion: completion, error: errorCallback)
                 } else {
+                    self.retries = 0
                     completion(self.artists)
                 }
 
             case .failure(let error):
+                print(response.request?.url)
                 print(error)
-                errorCallback("Encountered a network error")
+                if self.retries < self.maxRetries {
+                    self.retries += 1
+                    self.getArtists(user: user, progress: progress, completion: completion, error: errorCallback)
+                } else {
+                    errorCallback("Encountered a network error")
+                }
             }
         }
     }

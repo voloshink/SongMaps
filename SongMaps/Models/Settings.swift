@@ -11,6 +11,7 @@ import Foundation
 class Settings {
     
     let defaults = UserDefaults.standard
+    let dateFormatter = ISO8601DateFormatter()
     
     // Search Radius in Miles
     var radius: Int {
@@ -43,12 +44,28 @@ class Settings {
         }
     }
     
+    var lastUsedLocation: String? {
+        didSet {
+            defaults.set(lastUsedLocation, forKey: Keys.lastUsedLocation)
+        }
+    }
+    
+    var lastGotEvents: Date? {
+        didSet {
+            if let lastGotEvents = lastGotEvents {
+                defaults.set(dateFormatter.string(from: lastGotEvents), forKey: Keys.lastGotEvents)
+            }
+        }
+    }
+    
     struct Keys {
         static let radius = "radius"
         static let location = "location"
         static let lat = "lat"
         static let long = "long"
         static let launchedBefore = "launchedBefore"
+        static let lastUsedLocation = "lastUsedLocation"
+        static let lastGotEvents = "lastGotEvents"
     }
     
     init() {
@@ -72,6 +89,12 @@ class Settings {
             self.long = long
         } else {
             self.long = 0
+        }
+        
+        lastUsedLocation = defaults.string(forKey: Keys.lastUsedLocation)
+        
+        if let lastGotEventsString = defaults.string(forKey: Keys.lastGotEvents) {
+            lastGotEvents = dateFormatter.date(from: lastGotEventsString)
         }
     }
 }

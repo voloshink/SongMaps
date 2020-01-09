@@ -51,10 +51,6 @@ class Ticketmaster {
                 print("Loaded page " + String(currentPage))
                 self.parseEvents(json: newEvents)
                 if currentPage < totalPages {
-                    
-                    // TODO
-//                    completion(self.parseEvents(json: allEvents))
-//                    return
 
                     // hard api limit
                     if (self.size * (page + 1) >= 1000) {

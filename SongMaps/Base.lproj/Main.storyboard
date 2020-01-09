@@ -138,7 +138,6 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </mapView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="qe7-PV-5vB" firstAttribute="bottom" secondItem="NVz-9v-9wo" secondAttribute="bottom" id="KxE-Os-76j"/>
                             <constraint firstItem="NVz-9v-9wo" firstAttribute="leading" secondItem="qe7-PV-5vB" secondAttribute="leading" id="op5-sn-DtR"/>
@@ -147,7 +146,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qe7-PV-5vB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" image="mappin.and.ellipse" catalog="system" selectedImage="mappin.and.ellipse" id="SO3-Lu-bXv"/>
+                    <tabBarItem key="tabBarItem" image="mappin.circle" catalog="system" selectedImage="mappin.circle" id="SO3-Lu-bXv"/>
                     <connections>
                         <outlet property="mapView" destination="NVz-9v-9wo" id="lx0-0h-hfH"/>
                     </connections>
@@ -160,7 +159,7 @@
         <scene sceneID="Nyk-WG-Xkf">
             <objects>
                 <tableViewController id="xOE-k4-73y" customClass="EventTableViewController" customModule="SongMaps" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="QWP-Zw-EIb">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="QWP-Zw-EIb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -289,7 +288,6 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J3B-IN-jj4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="Csd-u1-kyb" kind="relationship" relationship="viewControllers" id="Y0v-gX-fU6"/>
@@ -361,7 +359,7 @@
     </scenes>
     <resources>
         <image name="list" width="30" height="30"/>
-        <image name="mappin.and.ellipse" catalog="system" width="58" height="64"/>
+        <image name="mappin.circle" catalog="system" width="64" height="60"/>
         <image name="wrench" catalog="system" width="64" height="60"/>
     </resources>
 </document>

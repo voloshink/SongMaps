@@ -19,12 +19,9 @@ class MapViewController: UIViewController, Storyboarded, EventHandler {
         super.viewDidLoad()
         mapView.delegate = self
         
-        // TODO
-        let initialLocation = CLLocation(latitude: 42.36008406, longitude: -71.05890512)
+        let initialLocation = CLLocation(latitude: settings.lat, longitude: settings.long)
         centerMapOnLocation(location: initialLocation)
-        
-//        let event = Event(name: "Temples", venue: "The Sinclair Music Hall", date: Date(), coordinate: CLLocationCoordinate2D(latitude: 42.380199, longitude: -71.134697))
-//         mapView.addAnnotation(event)
+
         mapView.isZoomEnabled = true
         
         for event in events {

@@ -22,7 +22,7 @@ class LocationRequestViewController: UIViewController, Storyboarded, CLLocationM
         super.viewDidLoad()
         
         locationManager.delegate = self
-//        locationManager.requestLocation()
+        locationManager.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -32,16 +32,11 @@ class LocationRequestViewController: UIViewController, Storyboarded, CLLocationM
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // TODO handle error
-        print("error!")
-        print(error)
-        // DEBUG
-//        performSegue(withIdentifier: "segueToHome", sender: self)
+        //        locationManager.requestWhenInUseAuthorization()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
-            // TODO handle error
             return
         }
 
@@ -51,11 +46,6 @@ class LocationRequestViewController: UIViewController, Storyboarded, CLLocationM
     }
     
     @IBAction func requestTap(_ sender: UIButton) {
-        if (CLLocationManager.locationServicesEnabled()) {
-            coordinator?.goToMain()
-        } else {
-            locationManager.requestWhenInUseAuthorization()
-        }
-        
+        locationManager.requestWhenInUseAuthorization()
     }
 }

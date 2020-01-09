@@ -30,6 +30,7 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
         locationManager.delegate = self
         
         ticketmaster = Ticketmaster(container: container)
+        print(settings.location)
         if settings.launchedBefore {
             print("requesting location")
             locationManager.requestLocation()
@@ -42,6 +43,7 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     // MARK: - CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways || status == .authorizedWhenInUse {
+            print("requesting location")
             locationManager.requestLocation()
         }
     }
@@ -49,25 +51,26 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("location manager error VVV")
         print(error)
-        // TODO
-        settings.lat = 42.380199
-        settings.long = -71.134697
+
         guard let error = error as? CLError else {
             return
         }
-        
-        guard error.code == CLError.Code.denied else {
-            getEvents()
-            return
-        }
-        
         
         // Only try to ask the user for location once
         guard !locationRequestRejected else {
             return
         }
         
-        locationManager.requestWhenInUseAuthorization()
+        if error.code == CLError.Code.denied {
+            locationRequestRejected = true
+            getEvents()
+            return
+        } else {
+            getEvents()
+            locationManager.requestWhenInUseAuthorization()
+        }
+        
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -92,7 +95,7 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
         }
     }
     
-    private func loadEvents() {
+    func loadEvents() {
         let request = Event.createFetchRequest()
         let sort = NSSortDescriptor(key: "date", ascending: true)
         request.sortDescriptors = [sort]
@@ -108,7 +111,13 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
                     artistNames.insert(artist.name.lowercased())
                 }
 
+                let now = Date()
                 for event in unfilteredEvents {
+                    if event.date < now {
+                        self.container.viewContext.delete(event)
+                        continue
+                    }
+
                     let eventArtists = event.artists.lowercased().components(separatedBy: "|")
                     for eventArtist in eventArtists {
                         if (artistNames.contains(eventArtist)) {
@@ -116,6 +125,8 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
                         }
                     }
                 }
+                
+                self.saveContext()
 
                 DispatchQueue.main.async {
                     self.events = matchedEvents
@@ -150,17 +161,31 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
         guard !loadingEvents else {
             return
         }
-
+        
+        
+        if let lastLoaded = settings.lastGotEvents {
+            let now = Date()
+            guard now - lastLoaded > 3600 || settings.lastUsedLocation != settings.location else {
+                print("recently loaded, \(now - lastLoaded) seconds ago")
+                return
+            }
+        }
+        
         loadingEvents = true
-        //        ticketmaster.getNewEvents(location: settings.location!, radius: settings.radius)
-        ticketmaster.getNewEvents(geoPoint: "drt2zp2mr", radius: 100, progress: {
-            self.saveContext()
-            self.loadEvents()
+        guard let location = settings.location else {
+            return
+        }
+
+        ticketmaster.getNewEvents(geoPoint: location, radius: settings.radius, progress: {
+                self.saveContext()
+                self.loadEvents()
             },
             completion: {
-            self.saveContext()
-            self.loadEvents()
-            self.loadingEvents = false
+                self.saveContext()
+                self.loadEvents()
+                self.loadingEvents = false
+                settings.lastGotEvents = Date()
+                settings.lastUsedLocation = settings.location
         }, error: {error in
             print("get new events error VV")
             print(error)

@@ -58,12 +58,16 @@ class SettingsViewController: UIViewController, Storyboarded {
                 }
                 
                 self.customTabBar.saveContext()
+                self.customTabBar.loadArtists()
+                self.customTabBar.loadEvents()
                 self.lastFMAlert()
             }))
             
             alert.addAction(UIAlertAction(title: "Use Existing", style: .default, handler: { _ in
                 self.lastFMAlert()
             }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
         } else {
@@ -111,7 +115,6 @@ class SettingsViewController: UIViewController, Storyboarded {
         lastFMButton.setTitle("Getting Artists", for: .normal)
         
         lastFM.getArtists(user: username, progress: { progress in
-            print(progress)
             
             var percentage = Int(progress * 100)
             if percentage > 100 {
@@ -146,13 +149,13 @@ class SettingsViewController: UIViewController, Storyboarded {
         
         customTabBar.saveContext()
         customTabBar.loadArtists()
+        customTabBar.loadEvents()
         self.artists = customTabBar.artists
         resetUI()
     }
     
     private func hasArtists(from source: String) -> Bool {
         for artist in artists {
-            print(artist.source, source)
             if artist.source == source {
                 return true
             }
@@ -172,12 +175,16 @@ class SettingsViewController: UIViewController, Storyboarded {
                 }
                 
                 self.customTabBar.saveContext()
+                self.customTabBar.loadArtists()
+                self.customTabBar.loadEvents()
                 self.getSpotify()
             }))
             
             alert.addAction(UIAlertAction(title: "Use Existing", style: .default, handler: { _ in
                 self.getSpotify()
             }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
         } else {
@@ -200,7 +207,6 @@ class SettingsViewController: UIViewController, Storyboarded {
     }
     
     func spotifyAuthResponse(code: String, state: String, error: String?) {
-        print("SPOTIFY AUTH RESPONSE")
         if let error = error {
             print(error)
             showErrorAlert(error: "Authentication Error")
@@ -214,7 +220,6 @@ class SettingsViewController: UIViewController, Storyboarded {
             }
             self.spotifyButton.setTitle(String(percentage) + "%", for: .normal)
             }, completion: { artists in
-                print(artists)
                 self.parseArtists(service: "Spotify", artists: artists)
         }, error: { err in
             self.showErrorAlert(error: err)

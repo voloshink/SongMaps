@@ -54,6 +54,7 @@ class EventTableViewController: UITableViewController, EventHandler, Storyboarde
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard events.count != 0 else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyTableViewCell", for: indexPath)
+            cell.backgroundColor = .clear
             return cell
         }
         
@@ -78,7 +79,6 @@ class EventTableViewController: UITableViewController, EventHandler, Storyboarde
         let backgroundView = UIView(frame: tableView.bounds)
         backgroundView.layer.insertSublayer(gradientLayer, at: 0)
         tableView.backgroundView = backgroundView
-//        self.tableView.layer.insertSublayer(gradientLayer, at: 0)
         
          
         
