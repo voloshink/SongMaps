@@ -67,7 +67,12 @@ class LastFM {
                     self.artists.append(name)
                 }
                 
-                progress(Float((self.page * self.limit)) / Float(total))
+                if total == 0 {
+                    progress(1.0)
+                } else {
+                    progress(Float((self.page * self.limit)) / Float(total))
+                }
+                
                 
                 if self.page < totalPages {
                     self.page += 1
@@ -81,11 +86,15 @@ class LastFM {
             case .failure(let error):
                 print(response.request?.url)
                 print(error)
+                guard response.response?.statusCode != 404 else {
+                    errorCallback("Last.FM account \(user) not found.")
+                    return
+                }
                 if self.retries < self.maxRetries {
                     self.retries += 1
                     self.getArtists(user: user, progress: progress, completion: completion, error: errorCallback)
                 } else {
-                    errorCallback("Error getting artists for \(user), response code \(response.response?.statusCode ?? 999)")
+                    errorCallback("Error getting artists for username: \(user), response code \(response.response?.statusCode ?? 999)")
                 }
             }
         }

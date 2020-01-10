@@ -38,6 +38,11 @@ class SettingsViewController: UIViewController, Storyboarded, SpotifyHandler {
         artists = customTabBar.artists
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientBackground.setupView()
+    }
+    
     private func resetUI() {
         gradientBackground.resetToDefault()
         spotifyButton.alpha = 1

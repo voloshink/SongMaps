@@ -25,6 +25,11 @@ class LocationRequestViewController: UIViewController, Storyboarded, CLLocationM
         locationManager.requestLocation()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        backgroundView.setupView()
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             locationManager.requestLocation()

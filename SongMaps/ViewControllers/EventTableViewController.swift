@@ -19,13 +19,16 @@ class EventTableViewController: UITableViewController, EventHandler, Storyboarde
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupView()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupView()
     }
 
     // MARK: - Table view data source

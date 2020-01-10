@@ -26,7 +26,7 @@ class FluidBackgroundView: UIView {
       setupView()
     }
     
-    private func setupView() {
+    func setupView() {
         gradientSet.append([UIColor.orange.cgColor, UIColor.blue.cgColor])
         gradientSet.append([UIColor.blue.cgColor, UIColor.orange.cgColor])
         
