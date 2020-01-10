@@ -30,6 +30,15 @@ class LastFM {
     }
     
     func getArtists(user: String, progress: @escaping (Float) -> (), completion: @escaping ([String]) -> (), error errorCallback: @escaping (String) -> ()) {
+        guard (user.lowercased() != settings.lastFMTestName.lowercased()) else {
+            settings.demoMode = true
+            progress(1.0)
+            completion(["TestArtist"])
+            return
+        }
+        
+        settings.demoMode = false
+
         let url = String(format: urlTemplate, user, apiKey, limit, page)
         AF.request(url).validate().responseJSON { response in
             switch response.result {
@@ -76,7 +85,7 @@ class LastFM {
                     self.retries += 1
                     self.getArtists(user: user, progress: progress, completion: completion, error: errorCallback)
                 } else {
-                    errorCallback("Encountered a network error")
+                    errorCallback("Error getting artists for \(user), response code \(response.response?.statusCode ?? 999)")
                 }
             }
         }

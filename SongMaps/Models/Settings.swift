@@ -58,6 +58,15 @@ class Settings {
         }
     }
     
+    var demoMode: Bool {
+        didSet {
+            defaults.set(demoMode, forKey: Keys.demoMode)
+        }
+    }
+    
+    let spotifyTestName = "AppleAppTest12345"
+    let lastFMTestName = "AppleAppTest12345"
+    
     struct Keys {
         static let radius = "radius"
         static let location = "location"
@@ -66,6 +75,7 @@ class Settings {
         static let launchedBefore = "launchedBefore"
         static let lastUsedLocation = "lastUsedLocation"
         static let lastGotEvents = "lastGotEvents"
+        static let demoMode = "demoMode"
     }
     
     init() {
@@ -78,6 +88,8 @@ class Settings {
         location = defaults.string(forKey: Keys.location)
         
         launchedBefore = defaults.bool(forKey: Keys.launchedBefore)
+        
+        demoMode = defaults.bool(forKey: Keys.demoMode)
         
         if let lat = defaults.object(forKey: Keys.lat) as? Double {
             self.lat = lat

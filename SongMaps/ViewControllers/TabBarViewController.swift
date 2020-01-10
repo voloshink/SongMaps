@@ -30,7 +30,6 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
         locationManager.delegate = self
         
         ticketmaster = Ticketmaster(container: container)
-        print(settings.location)
         if settings.launchedBefore {
             print("requesting location")
             locationManager.requestLocation()
@@ -120,7 +119,7 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
 
                     let eventArtists = event.artists.lowercased().components(separatedBy: "|")
                     for eventArtist in eventArtists {
-                        if (artistNames.contains(eventArtist)) {
+                        if (artistNames.contains(eventArtist) || settings.demoMode) {
                             matchedEvents.append(event)
                         }
                     }

@@ -24,9 +24,7 @@ class MapViewController: UIViewController, Storyboarded, EventHandler {
 
         mapView.isZoomEnabled = true
         
-        for event in events {
-            mapView.addAnnotation(event)
-        }
+        addEvents(events: events)
     }
     
     func centerMapOnLocation(location: CLLocation) {
@@ -40,24 +38,19 @@ class MapViewController: UIViewController, Storyboarded, EventHandler {
         return Double(miles)/0.00062137
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     // MARK: - EventHandler
     
     func newEvents(events: [Event]) {
         self.events = events
-        guard let mapView = mapView else {
+
+        addEvents(events: events)
+    }
+    
+    func addEvents(events: [Event]) {
+        guard mapView != nil else {
             return
         }
+        mapView.removeAnnotations(self.mapView.annotations)
         for event in events {
             mapView.addAnnotation(event)
         }

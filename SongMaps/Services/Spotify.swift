@@ -81,10 +81,51 @@ class Spotify {
                 self.accessToken = accessToken
                 self.refreshToken = refreshToken
                 
-                self.getFollowedArtists(after: nil, progress: progress, completion: completion, error: errorCallback)
+                self.getUsername(after: nil, progress: progress, completion: completion, error: errorCallback)
             case .failure(let error):
              print(error)
              errorCallback("Error Requesting Authorization")
+            }
+        }
+    }
+    
+    private func getUsername(after: String?, progress: @escaping (Float) -> (), completion: @escaping ([String]) -> (), error errorCallback: @escaping (String) -> ()) {
+        let url = "https://api.spotify.com/v1/me"
+    
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: accessToken!)
+        ]
+        
+        AF.request(url, method: .get, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                
+                guard let username = json["display_name"].string else {
+                    return
+                }
+                
+                if (username.lowercased() == settings.spotifyTestName.lowercased()) {
+                    settings.demoMode = true
+                } else {
+                    settings.demoMode = false
+                }
+                
+                self.getFollowedArtists(after: nil, progress: progress, completion: completion, error: errorCallback)
+
+            case .failure(let error):
+                if response.response?.statusCode == 429 {
+                    if let retryTime = response.response?.allHeaderFields["Retry-After"] as? String {
+                        if let retrySeconds = Int(retryTime) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(retrySeconds)) {
+                                self.getUsername(after: nil, progress: progress, completion: completion, error: errorCallback)
+                            }
+                            return
+                        }
+                    }
+                }
+                print(error)
+                errorCallback("Error Getting Username")
             }
         }
     }

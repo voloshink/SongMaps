@@ -31,15 +31,18 @@ class Ticketmaster {
     
     func getNewEvents(geoPoint: String, radius: Int, page: Int = 1, progress: @escaping () -> (), completion: @escaping () -> (), error errorCallback: @escaping (String) -> ()) {
         let url = "https://app.ticketmaster.com/discovery/v2/events.json"
-        let parameters: [String: String] = [
+        var parameters: [String: String] = [
             "size": String(size),
             "apikey": apiKey,
-            "geoPoint": geoPoint,
             "classificationId": classificationId,
-            "radius": String(radius),
             "sort": sort,
             "page": String(page),
         ]
+        
+        if !settings.demoMode {
+            parameters["geoPoint"] = geoPoint
+            parameters["radius"] = String(radius)
+        }
         
         AF.request(url, method: .get, parameters: parameters).validate().responseJSON { response in
             switch response.result {
