@@ -47,7 +47,7 @@ class LocationRequestViewController: UIViewController, Storyboarded, CLLocationM
 
         settings.lat = location.coordinate.latitude
         settings.long = location.coordinate.longitude
-        settings.location = location.coordinate.geohash(length: 10)
+        settings.location = location.coordinate.geohash(length: settings.geohashLength)
         coordinator?.goToMain()
         
     }

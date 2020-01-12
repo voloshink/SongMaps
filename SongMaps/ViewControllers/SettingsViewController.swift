@@ -43,6 +43,12 @@ class SettingsViewController: UIViewController, Storyboarded, SpotifyHandler {
         gradientBackground.setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        gradientBackground.animateGradient()
+    }
+    
     private func resetUI() {
         gradientBackground.resetToDefault()
         spotifyButton.alpha = 1

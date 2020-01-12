@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import CoreLocation
 
 class EventTableViewCell: UITableViewCell {
 
@@ -26,12 +27,13 @@ class EventTableViewCell: UITableViewCell {
     func configureCell(event: Event) {
         self.event = event
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy"
+        dateFormatter.dateFormat = "h:mm a, MMM d, yyyy"
         
         nameLabel.text = event.name
         dateLabel.text = dateFormatter.string(from: event.date)
         venuNameLabel.text = event.venue
         let distance = Int(event.distance)
+
         if distance > 1 {
             distanceLabel.text = String(distance) + " miles away"
         } else if distance == 1 {

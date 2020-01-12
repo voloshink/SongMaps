@@ -77,7 +77,7 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
             return
         }
         print("Got location")
-        settings.location = location.coordinate.geohash(length: 10)
+        settings.location = location.coordinate.geohash(length: settings.geohashLength)
         settings.lat = location.coordinate.latitude
         settings.long = location.coordinate.longitude
         getEvents()
@@ -123,6 +123,43 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
                             matchedEvents.append(event)
                         }
                     }
+                    
+                    if settings.demoMode {
+                        for event in matchedEvents {
+                            var distance = event.distance
+                            if distance == 0 {
+                                let eventLocation = CLLocation(latitude: CLLocationDegrees(event.lat), longitude: CLLocationDegrees(event.long))
+                                let currentLocation = CLLocation(latitude: CLLocationDegrees(settings.lat), longitude: CLLocationDegrees(settings.long))
+                                let distanceInMeters = eventLocation.distance(from: currentLocation)
+                                distance = Float(Int(distanceInMeters/1609))
+                                event.distance = distance
+                            }
+                        }
+                        
+                        var localEvents = [Event]()
+                        var tries = 0
+                        var threshold: Float = 100.0
+                        
+                        while (localEvents.count < 5 && tries < 10) {
+                            localEvents = [Event]()
+                            for event in matchedEvents {
+                                if (event.distance <= threshold) {
+                                    localEvents.append(event)
+                                }
+                            }
+                            
+                            threshold += 100
+                            tries += 1
+                        }
+                        
+                        if localEvents.count > 5 {
+                            matchedEvents = localEvents
+                        }
+                    }
+                    
+                    
+                    
+
                 }
                 
                 self.saveContext()
@@ -130,6 +167,7 @@ class TabBarViewController: UITabBarController, CLLocationManagerDelegate, Story
                 DispatchQueue.main.async {
                     self.events = matchedEvents
                     print("Matched \(matchedEvents.count) events from disk")
+                    print(self.events)
                     guard let viewControllers = self.viewControllers else {
                         return
                     }

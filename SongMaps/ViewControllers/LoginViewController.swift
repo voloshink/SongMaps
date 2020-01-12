@@ -35,6 +35,12 @@ class LoginViewController: UIViewController, Storyboarded, SpotifyHandler {
         super.viewDidLayoutSubviews()
         backgroundView.setupView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        backgroundView.animateGradient()
+    }
 
     
     override func viewDidAppear(_ animated: Bool) {

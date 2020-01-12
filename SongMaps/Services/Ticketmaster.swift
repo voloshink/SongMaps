@@ -22,7 +22,7 @@ class Ticketmaster {
     init(container: NSPersistentContainer) {
         self.container = container
         if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
-           let nsDictionary = NSDictionary(contentsOfFile: path)
+            let nsDictionary = NSDictionary(contentsOfFile: path)
             apiKey = nsDictionary!["ticketmaster"] as! String
         } else {
             fatalError("TicketMaster key not found")
@@ -47,6 +47,7 @@ class Ticketmaster {
         AF.request(url, method: .get, parameters: parameters).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
+                print(response.request?.url)
                 let json = JSON(value)
                 let newEvents = json["_embedded"]["events"].arrayValue
                 let totalPages = json["page"]["totalPages"].int ?? 0
@@ -54,7 +55,7 @@ class Ticketmaster {
                 print("Loaded page " + String(currentPage))
                 self.parseEvents(json: newEvents)
                 if currentPage < totalPages {
-
+                    
                     // hard api limit
                     if (self.size * (page + 1) >= 1000) {
                         completion()
@@ -70,24 +71,22 @@ class Ticketmaster {
                 }
                 
             case .failure(let error):
-             print(error)
-             print(response.request?.url)
-             if (response.response?.statusCode == 429) {
-                let seconds = 2.0
-                DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                    self.getNewEvents(geoPoint: geoPoint, radius: radius, page: page, progress: progress, completion: completion, error: errorCallback)
+                print(error)
+                print(response.request?.url)
+                if (response.response?.statusCode == 429) {
+                    let seconds = 2.0
+                    DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                        self.getNewEvents(geoPoint: geoPoint, radius: radius, page: page, progress: progress, completion: completion, error: errorCallback)
+                    }
+                } else {
+                    errorCallback("Error Getting Events")
                 }
-             } else {
-                errorCallback("Error Getting Events")
-             }
             }
         }
     }
     
     private func parseEvents(json: [JSON]) {
         
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
         let dateFormatter = ISO8601DateFormatter()
         
         for event in json {

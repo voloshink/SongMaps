@@ -16,6 +16,8 @@ class FluidBackgroundView: UIView {
     
     var delayedGradientUpdate: [[CGColor]]?
     
+    var gradientSetup = false
+    
     override init(frame: CGRect) {
       super.init(frame: frame)
       setupView()
@@ -27,21 +29,29 @@ class FluidBackgroundView: UIView {
     }
     
     func setupView() {
-        gradientSet.append([UIColor.orange.cgColor, UIColor.blue.cgColor])
-        gradientSet.append([UIColor.blue.cgColor, UIColor.orange.cgColor])
+        if !gradientSetup {
+            gradientSet.append([UIColor.orange.cgColor, UIColor.blue.cgColor])
+            gradientSet.append([UIColor.blue.cgColor, UIColor.orange.cgColor])
+            gradientLayer.colors = gradientSet[currentGradient]
+            gradientLayer.drawsAsynchronously = true
+        }
         
         
         gradientLayer.frame = bounds
-        gradientLayer.colors = gradientSet[currentGradient]
+
         gradientLayer.startPoint = CGPoint(x:0, y:0)
         gradientLayer.endPoint = CGPoint(x:1, y:1)
-        gradientLayer.drawsAsynchronously = true
-        layer.insertSublayer(gradientLayer, at: 0)
         
-        animateGradient()
+        if !gradientSetup {
+            layer.insertSublayer(gradientLayer, at: 0)
+            animateGradient()
+        }
+        
+        gradientSetup = true
+        
     }
     
-    private func animateGradient() {
+    func animateGradient() {
         currentGradient = nextGradientIndex(from: currentGradient)
         
         let gradientChangeAnimation = CABasicAnimation(keyPath: "colors")

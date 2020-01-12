@@ -66,6 +66,7 @@ class Settings {
     
     let spotifyTestName = "AppleAppTest12345"
     let lastFMTestName = "AppleAppTest12345"
+    let geohashLength = 9
     
     struct Keys {
         static let radius = "radius"
